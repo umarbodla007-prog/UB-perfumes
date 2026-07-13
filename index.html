@@ -33,15 +33,23 @@
         // गूगल शीट से डेटा खींचने का लिंक
         const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}`;
 
-        fetch(url)
-            .then(res => res.text())
-            .then(data => {
-                // गूगल शीट के कच्चे डेटा को साफ़ और सही फॉर्मेट में बदलना
-                const json = JSON.parse(data.substr(47).slice(0, -2));
-                const rows = json.table.rows;
-                const perfumeList = document.getElementById('perfume-list');
-                perfumeList.innerHTML = ''; // लोड हो रहे हैं मैसेज को हटाना
+        // अपनी Sheet ID यहाँ डालें (बाकी सब वैसा ही रहने दें)
+const SHEET_ID = 'YOUR_SPREADSHEET_ID_HERE'; 
 
+// बिना API Key के सीधे शीट का डेटा पढ़ने का यूआरएल
+const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+
+fetch(url)
+  .then(res => res.text())
+  .then(data => {
+    // गूगल शीट के अजीब डेटा को साफ़ करके काम का बनाने के लिए
+    const json = JSON.parse(data.substr(47).slice(0, -2));
+    const rows = json.table.rows;
+    
+    // यहाँ से आपका पुराना कोड जो प्रोडक्ट्स को स्क्रीन पर दिखाता है...
+    // (यदि आपके पुराने कोड में 'rows' का इस्तेमाल हुआ है, तो यह तुरंत काम कर जाएगा)
+  });
+        
                 // हर लाइन (Row) के लिए एक प्रोडक्ट कार्ड बनाना
                 rows.forEach(row => {
                     const name = row.c[0] ? row.c[0].v : 'Perfume';
