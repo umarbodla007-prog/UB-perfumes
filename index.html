@@ -3,78 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Perfume Brand</title>
+    <title>My Perfume Store</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f9f9f9; text-align: center; padding: 20px; }
-        .title { color: #333; margin-bottom: 30px; }
-        .product-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-        .product-card { background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; width: 250px; text-align: center; }
-        .product-card img { max-width: 100%; height: 200px; object-fit: cover; border-radius: 8px; }
-        .product-name { font-size: 1.2rem; margin: 15px 0 5px; color: #222; }
-        .product-price { font-size: 1.1rem; color: #b12704; font-weight: bold; margin-bottom: 10px; }
-        .product-desc { font-size: 0.9rem; color: #666; height: 40px; overflow: hidden; }
-        .buy-btn { display: inline-block; background-color: #25D366; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 15px; }
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f9f9f9; padding: 20px; }
+        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px; }
+        .card { background: white; border-radius: 10px; padding: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 250px; text-align: center; }
+        .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; }
+        .price { color: #27ae60; font-size: 18px; font-weight: bold; margin: 10px 0; }
+        .btn { background-color: #25D366; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; text-decoration: none; display: inline-block; }
     </style>
 </head>
 <body>
 
-    <h1 class="title">हमारे लक्जरी परफ्यूम्स</h1>
-    
-    <!-- यहाँ हमारे परफ्यूम्स अपने आप दिखाई देंगे -->
-    <div id="perfume-list" class="product-container">
-        <p>परफ्यूम्स लोड हो रहे हैं...</p>
-    </div>
+    <h1>हमारे लग्जरी परफ्यूम्स</h1>
+    <div id="loading">परफ्यूम्स लोड हो रहे हैं...</div>
+    <div class="container" id="perfume-list"></div>
 
     <script>
-        // ⚠️ यहाँ अपनी असली Google Sheet ID और अपनी Sheet का नाम डालें
-        const SHEET_ID = 13rNvj9LgIuMGplhhNrScH8I8cwguZ5inDTzGphm1EqY
-        const SHEET_NAME = 'Sheet1'; // आपकी शीट के टैब का नाम
-
-        // गूगल शीट से डेटा खींचने का लिंक
-        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}`;
-
-        // अपनी Sheet ID यहाँ डालें (बाकी सब वैसा ही रहने दें)
-const SHEET_ID = 'YOUR_SPREADSHEET_ID_HERE'; 
-
-// बिना API Key के सीधे शीट का डेटा पढ़ने का यूआरएल
-const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
-
-fetch(url)
-  .then(res => res.text())
-  .then(data => {
-    // गूगल शीट के अजीब डेटा को साफ़ करके काम का बनाने के लिए
-    const json = JSON.parse(data.substr(47).slice(0, -2));
-    const rows = json.table.rows;
-    
-    // यहाँ से आपका पुराना कोड जो प्रोडक्ट्स को स्क्रीन पर दिखाता है...
-    // (यदि आपके पुराने कोड में 'rows' का इस्तेमाल हुआ है, तो यह तुरंत काम कर जाएगा)
-  });
+        // 📌 सिर्फ अपनी असली Google Sheet ID यहाँ डालें (बाकी कुछ नहीं बदलना)
+        const SHEET_ID = https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json
         
-                // हर लाइन (Row) के लिए एक प्रोडक्ट कार्ड बनाना
-                rows.forEach(row => {
-                    const name = row.c[0] ? row.c[0].v : 'Perfume';
-                    const price = row.c[1] ? row.c[1].v : '0';
-                    const description = row.c[2] ? row.c[2].v : '';
-                    const image = row.c[3] ? row.c[3].v : 'https://via.placeholder.com/200';
+        // आपका अपना व्हाट्सएप नंबर (देश के कोड के साथ, जैसे 919876543210)
+        const WHATSAPP_NUMBER = '919898647697 
 
-                    // व्हाट्सएप पर ऑर्डर भेजने का लिंक (अपना नंबर 91XXXXXXXXXX की जगह डालें)
-                    const whatsappLink = `https://wa.me/919898647697?text=नमस्ते, मुझे आपका यह परफ्यूम ऑर्डर करना है: ${name}`;
+        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
-                    const productHTML = `
-                        <div class="product-card">
+        fetch(url)
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('loading').style.display = 'none';
+                
+                // गूगल शीट के डेटा को साफ़ करना
+                const json = JSON.parse(data.substr(47).slice(0, -2));
+                const rows = json.table.rows;
+                const container = document.getElementById('perfume-list');
+
+                // यदि शीट खाली है
+                if(rows.length <= 1) {
+                    container.innerHTML = "<p>अभी कोई परफ्यूम उपलब्ध नहीं है।</p>";
+                    return;
+                }
+
+                // पहली लाइन (row[0]) हेडर की होती है, इसलिए i = 1 से शुरू कर रहे हैं
+                for (let i = 1; i < rows.length; i++) {
+                    const row = rows[i].c;
+                    
+                    const name = row[0] ? row[0].v : 'No Name';
+                    const price = row[1] ? row[1].v : '0';
+                    const desc = row[2] ? row[2].v : '';
+                    const image = row[3] ? row[3].v : 'https://via.placeholder.com/300';
+
+                    // व्हाट्सएप मैसेज का लिंक तैयार करना
+                    const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=नमस्ते, मुझे आपका यह परफ्यूम ऑर्डर करना है: ${encodeURIComponent(name)}`;
+
+                    // स्क्रीन पर दिखाने के लिए कार्ड बनाना
+                    container.innerHTML += `
+                        <div class="card">
                             <img src="${image}" alt="${name}">
-                            <div class="product-name">${name}</div>
-                            <div class="product-desc">${description}</div>
-                            <div class="product-price">₹${price}</div>
-                            <a href="${whatsappLink}" target="_blank" class="buy-btn">WhatsApp पर ऑर्डर करें</a>
+                            <h3>${name}</h3>
+                            <p>${desc}</p>
+                            <div class="price">₹${price}</div>
+                            <a href="${whatsappLink}" target="_blank" class="btn">WhatsApp पर ऑर्डर करें</a>
                         </div>
                     `;
-                    perfumeList.innerHTML += productHTML;
-                });
+                }
             })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-                document.getElementById('perfume-list').innerHTML = '<p>परफ्यूम लोड करने में दिक्कत आ रही है। कृपया अपनी शीट आईडी चेक करें।</p>';
+            .catch(err => {
+                document.getElementById('loading').innerText = "डेटा लोड करने में समस्या आई। कृपया अपनी गूगल शीट की शेयर सेटिंग्स चेक करें।";
+                console.error(err);
             });
     </script>
 </body>
