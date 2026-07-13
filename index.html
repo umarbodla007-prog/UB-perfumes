@@ -1,165 +1,73 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="K3TaRCv0iyq29o8nM_OL7_dqZcPhPGoS5_iiDNVAOkw" />
-    <title>UB Perfumes & Attars</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            dark: '#0f172a',
-                            darker: '#020617',
-                            gold: '#d4af37',
-                            goldlight: '#fde047',
-                            light: '#f8fafc',
-                            gray: '#64748b'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    <title>My Perfume Brand</title>
     <style>
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #fde047; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .product-img-container { overflow: hidden; }
-        .product-img-container img { transition: transform 0.5s ease; }
-        .group:hover .product-img-container img { transform: scale(1.05); }
+        body { font-family: Arial, sans-serif; background-color: #f9f9f9; text-align: center; padding: 20px; }
+        .title { color: #333; margin-bottom: 30px; }
+        .product-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .product-card { background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; width: 250px; text-align: center; }
+        .product-card img { max-width: 100%; height: 200px; object-fit: cover; border-radius: 8px; }
+        .product-name { font-size: 1.2rem; margin: 15px 0 5px; color: #222; }
+        .product-price { font-size: 1.1rem; color: #b12704; font-weight: bold; margin-bottom: 10px; }
+        .product-desc { font-size: 0.9rem; color: #666; height: 40px; overflow: hidden; }
+        .buy-btn { display: inline-block; background-color: #25D366; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 15px; }
     </style>
 </head>
-<body class="bg-brand-light text-brand-dark font-sans antialiased flex flex-col min-h-screen">
-    <nav class="fixed w-full z-50 bg-brand-darker/95 backdrop-blur-sm border-b border-brand-gold/20 text-brand-light transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex items-center sm:hidden">
-                    <button type="button" class="text-brand-light hover:text-brand-gold focus:outline-none" onclick="toggleMobileMenu()">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
-                <div class="flex-shrink-0 flex items-center justify-center sm:justify-start w-full sm:w-auto">
-                    <a href="#" class="font-serif text-3xl font-bold tracking-wider text-brand-gold">UB <span class="font-sans text-xl font-light text-brand-light">PERFUMES</span></a>
-                </div>
-                <div class="hidden sm:flex sm:space-x-8 sm:items-center">
-                    <a href="#" class="text-brand-light hover:text-brand-gold px-3 py-2 text-sm font-medium transition-colors">Home</a>
-                    <a href="#shop" class="text-brand-light hover:text-brand-gold px-3 py-2 text-sm font-medium transition-colors">Shop</a>
-                    <a href="#about" class="text-brand-light hover:text-brand-gold px-3 py-2 text-sm font-medium transition-colors">About Us</a>
-                </div>
-                <div class="flex items-center sm:absolute sm:right-8 absolute right-4">
-                    <button onclick="toggleCart()" class="relative p-2 text-brand-light hover:text-brand-gold transition-colors group">
-                        <i class="fas fa-shopping-bag text-2xl"></i>
-                        <span id="cart-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-brand-dark bg-brand-gold rounded-full transform translate-x-1/4 -translate-y-1/4">0</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="mobile-menu" class="hidden sm:hidden bg-brand-dark border-t border-brand-gold/20">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#" class="block px-3 py-2 text-base font-medium text-brand-light hover:text-brand-gold hover:bg-brand-darker rounded-md">Home</a>
-                <a href="#shop" class="block px-3 py-2 text-base font-medium text-brand-light hover:text-brand-gold hover:bg-brand-darker rounded-md">Shop</a>
-                <a href="#about" class="block px-3 py-2 text-base font-medium text-brand-light hover:text-brand-gold hover:bg-brand-darker rounded-md">About Us</a>
-            </div>
-        </div>
-    </nav>
-    <header class="relative bg-brand-darker h-screen flex items-center justify-center overflow-hidden pt-20">
-        <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] pointer-events-none"></div>
-        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
-            <span class="block text-brand-gold font-sans tracking-[0.3em] uppercase text-sm mb-4">Discover Your Essence</span>
-            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-brand-light mb-6 leading-tight">The Art of <br><span class="italic text-brand-gold">Fine Fragrance</span></h1>
-            <p class="text-brand-gray text-lg md:text-xl mb-10 max-w-2xl mx-auto font-light">Explore our exquisite collection of authentic attars and premium perfumes.</p>
-            <a href="#shop" class="inline-block bg-brand-gold text-brand-dark px-10 py-4 rounded-none font-medium tracking-wide hover:bg-brand-light hover:text-brand-darker transition-all duration-300 border border-brand-gold">EXPLORE COLLECTION</a>
-        </div>
-    </header>
-    <main class="flex-grow">
-        <section id="shop" class="py-24 bg-brand-light">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <h2 class="font-serif text-4xl md:text-5xl text-brand-darker mb-4">Our Signature Scents</h2>
-                    <div class="w-24 h-1 bg-brand-gold mx-auto mb-6"></div>
-                </div>
-                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12"></div>
-            </div>
-        </section>
-    </main>
-    <div id="cart-overlay" class="fixed inset-0 bg-black/50 z-[60] hidden opacity-0 transition-opacity duration-300" onclick="toggleCart()"></div>
-    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-brand-light z-[70] transform translate-x-full transition-transform duration-300 flex flex-col border-l border-brand-gold/30">
-        <div class="flex items-center justify-between p-6 border-b border-gray-200 bg-white">
-            <h2 class="font-serif text-2xl text-brand-darker">Your Cart</h2>
-            <button onclick="toggleCart()" class="text-brand-gray hover:text-brand-darker"><i class="fas fa-times text-2xl"></i></button>
-        </div>
-        <div id="cart-items" class="flex-grow p-6 overflow-y-auto no-scrollbar bg-brand-light">
-            <ul id="cart-item-list" class="space-y-6"></ul>
-        </div>
+<body>
+
+    <h1 class="title">हमारे लक्जरी परफ्यूम्स</h1>
+    
+    <!-- यहाँ हमारे परफ्यूम्स अपने आप दिखाई देंगे -->
+    <div id="perfume-list" class="product-container">
+        <p>परफ्यूम्स लोड हो रहे हैं...</p>
     </div>
-    <button onclick="toggleAIChat()" class="fixed bottom-6 right-6 bg-brand-gold text-brand-darker w-14 h-14 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] flex items-center justify-center text-2xl z-40 group"><i class="fas fa-sparkles"></i></button>
-    <div id="ai-chat-window" class="fixed bottom-24 right-6 w-[350px] sm:w-[400px] bg-white rounded-2xl shadow-2xl border border-brand-gold/30 flex flex-col hidden z-50 overflow-hidden transition-all duration-300 origin-bottom-right scale-0">
-        <div class="bg-brand-darker text-brand-gold p-4 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-brand-gold/20 flex items-center justify-center"><i class="fas fa-magic text-sm"></i></div>
-                <div>
-                    <h3 class="font-serif text-lg font-medium leading-tight">AI Scent Expert</h3>
-                    <p class="text-[10px] text-brand-gray uppercase tracking-widest">Powered by Gemini</p>
-                </div>
-            </div>
-            <button onclick="toggleAIChat()" class="text-brand-gray hover:text-brand-gold"><i class="fas fa-times text-xl"></i></button>
-        </div>
-        <div id="ai-chat-history" class="p-4 h-[350px] overflow-y-auto flex flex-col gap-4 bg-brand-light/50 text-sm">
-            <div class="self-start bg-white border border-gray-100 p-3.5 rounded-2xl rounded-tl-none">Welcome to UB Perfumes! ✨<br><br>I am your personal AI Scent Expert. Ask me anything!</div>
-        </div>
-        <div class="p-3 border-t border-gray-200 bg-white flex gap-2 items-center">
-            <input type="text" id="ai-chat-input" placeholder="Ask for a recommendation..." class="flex-grow p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm" onkeypress="handleAIChatEnter(event)">
-            <button onclick="sendAIQuery()" id="ai-send-btn" class="bg-brand-darker text-brand-gold w-12 h-12 rounded-xl flex items-center justify-center"><i class="fas fa-paper-plane"></i></button>
-        </div>
-    </div>
+
     <script>
-        const products = [
-            { id: 1, name: "Majestic Oudh", category: "Pure Attar", price: 85.00, description: "Deep, woody, and intensely oriental.", image: "https://placehold.co/500x600/0f172a/d4af37?text=Majestic+Oudh" },
-            { id: 2, name: "Velvet Rose", category: "Eau de Parfum", price: 120.00, description: "A modern interpretation of classic damask rose.", image: "https://placehold.co/500x600/f8fafc/0f172a?text=Velvet+Rose" },
-            { id: 3, name: "Royal Amber", category: "Pure Attar", price: 65.00, description: "Warm, sweet, and comforting earthy tones.", image: "https://placehold.co/500x600/0f172a/d4af37?text=Royal+Amber" },
-            { id: 4, name: "Midnight Musk", category: "Eau de Parfum", price: 95.00, description: "Sensual, powdery, and deeply alluring.", image: "https://placehold.co/500x600/f8fafc/0f172a?text=Midnight+Musk" }
-        ];
-        let cart = [];
-        function init() {
-            renderProducts();
-        }
-        function renderProducts() {
-            const grid = document.getElementById('product-grid');
-            if (grid) {
-                grid.innerHTML = products.map(product => `
-                    <div class="group bg-white rounded-none border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full relative overflow-hidden">
-                        <div class="relative w-full h-[350px] bg-gray-100 product-img-container">
-                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
-                            <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-black/80 to-transparent">
-                                <button onclick="addToCart(${product.id})" class="w-full bg-brand-gold text-brand-darker font-medium py-3 uppercase tracking-wider text-sm hover:bg-white transition-colors">Add to Cart</button>
-                            </div>
+        // ⚠️ यहाँ अपनी असली Google Sheet ID और अपनी Sheet का नाम डालें
+        const SHEET_ID = 13rNvj9LgIuMGplhhNrScH8I8cwguZ5inDTzGphm1EqY
+        const SHEET_NAME = 'Sheet1'; // आपकी शीट के टैब का नाम
+
+        // गूगल शीट से डेटा खींचने का लिंक
+        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}`;
+
+        fetch(url)
+            .then(res => res.text())
+            .then(data => {
+                // गूगल शीट के कच्चे डेटा को साफ़ और सही फॉर्मेट में बदलना
+                const json = JSON.parse(data.substr(47).slice(0, -2));
+                const rows = json.table.rows;
+                const perfumeList = document.getElementById('perfume-list');
+                perfumeList.innerHTML = ''; // लोड हो रहे हैं मैसेज को हटाना
+
+                // हर लाइन (Row) के लिए एक प्रोडक्ट कार्ड बनाना
+                rows.forEach(row => {
+                    const name = row.c[0] ? row.c[0].v : 'Perfume';
+                    const price = row.c[1] ? row.c[1].v : '0';
+                    const description = row.c[2] ? row.c[2].v : '';
+                    const image = row.c[3] ? row.c[3].v : 'https://via.placeholder.com/200';
+
+                    // व्हाट्सएप पर ऑर्डर भेजने का लिंक (अपना नंबर 91XXXXXXXXXX की जगह डालें)
+                    const whatsappLink = `https://wa.me/919898647697?text=नमस्ते, मुझे आपका यह परफ्यूम ऑर्डर करना है: ${name}`;
+
+                    const productHTML = `
+                        <div class="product-card">
+                            <img src="${image}" alt="${name}">
+                            <div class="product-name">${name}</div>
+                            <div class="product-desc">${description}</div>
+                            <div class="product-price">₹${price}</div>
+                            <a href="${whatsappLink}" target="_blank" class="buy-btn">WhatsApp पर ऑर्डर करें</a>
                         </div>
-                        <div class="p-6 flex flex-col flex-grow text-center">
-                            <span class="text-brand-gray text-xs uppercase tracking-widest mb-2">${product.category}</span>
-                            <h3 class="font-serif text-xl text-brand-darker mb-2">${product.name}</h3>
-                            <p class="text-brand-gray text-sm mb-4 flex-grow italic">${product.description}</p>
-                            <span class="text-brand-dark font-medium text-lg">$${product.price.toFixed(2)}</span>
-                        </div>
-                    </div>
-                `).join('');
-            }
-        }
-        window.onload = init;
+                    `;
+                    perfumeList.innerHTML += productHTML;
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                document.getElementById('perfume-list').innerHTML = '<p>परफ्यूम लोड करने में दिक्कत आ रही है। कृपया अपनी शीट आईडी चेक करें।</p>';
+            });
     </script>
 </body>
-</html>google-site-verification: google404592db55430636.html
+</html>
