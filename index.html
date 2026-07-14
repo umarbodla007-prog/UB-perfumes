@@ -13,20 +13,20 @@
         header { text-align: center; padding: 20px 0 30px 0; border-bottom: 1px solid #f2f2f2; margin-bottom: 25px; }
         header h1 { font-size: 24px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
         
-        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 20px; text-align: left; padding-left: 5px; }
+        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 20px; text-align: left; padding-left: 5px; text-transform: capitalize; }
         
         /* एक लाइन में दो प्रोडक्ट दिखाने के लिए (Mobile Friendly Grid) */
         .container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
         
         /* प्रोडक्ट कार्ड (DMF स्टाइल) */
-        .card { background: #ffffff; display: flex; flex-direction: column; text-align: left; text-decoration: none; color: inherit; }
+        .card { background: #ffffff; display: flex; flex-direction: column; text-align: left; text-decoration: none; color: inherit; margin-bottom: 15px; }
         
         /* घुमावदार कोनों वाली प्रीमियम फोटो */
         .image-container { width: 100%; position: relative; padding-top: 110%; /* फोटो का परफेक्ट रेशियो */ background-color: #f5f5f5; border-radius: 20px; overflow: hidden; margin-bottom: 10px; }
         .card img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
         
         /* टेक्स्ट और डिटेल्स (Left-Aligned) */
-        .card h3 { font-size: 14px; font-weight: 500; color: #2c2c2c; margin-bottom: 4px; padding: 0 4px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        .card h3 { font-size: 14px; font-weight: 500; color: #2c2c2c; margin-bottom: 4px; padding: 0 4px; line-height: 1.3; }
         .desc { font-size: 12px; color: #777; margin-bottom: 6px; padding: 0 4px; }
         .price { font-size: 15px; font-weight: 600; color: #121212; padding: 0 4px; margin-bottom: 8px; }
         
@@ -43,13 +43,15 @@
         <h1>UB Perfumes</h1>
     </header>
 
-    <h2 class="section-title">Solid Perfume</h2>
+    <!-- बदला हुआ हेडिंग (Solid Perfume हटा दिया गया है) -->
+    <h2 class="section-title">Our Luxury Collection</h2>
+    
     <div id="loading">लोड हो रहा है...</div>
     <div class="container" id="perfume-list"></div>
 
     <script>
         // 📌 अपनी गूगल शीट की आईडी यहाँ डालें
-        const SHEET_ID = '13rNvj9LgIuMGplhhNrScH8I8cwguZ5inDTzGphm1EqY'
+        const SHEET_ID = '13rNvj9LgIuMGplhhNrScH8I8cwguZ5inDTzGphm1EqY'; 
         const WHATSAPP_NUMBER = '919898647697'; // अपना 10 अंकों का नंबर (91 के साथ) लिखें
 
         const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
@@ -58,7 +60,8 @@
             .then(res => res.text())
             .then(csvText => {
                 document.getElementById('loading').style.display = 'none';
-                const rows = csvText.split('\n');
+                // हर लाइन को अलग करना (टैक कैरेक्टर को भी हटाना)
+                const rows = csvText.split(/\r?\n/);
                 const container = document.getElementById('perfume-list');
 
                 if (rows.length <= 1) {
@@ -67,25 +70,31 @@
                 }
 
                 for (let i = 1; i < rows.length; i++) {
+                    if (!rows[i].trim()) continue;
+                    
                     const columns = rows[i].split(',');
                     if (columns.length < 2 || !columns[0].trim()) continue;
 
-                    const name = columns[0].replace(/"/g, '').trim();
-                    const price = columns[1].replace(/"/g, '').trim();
-                    const desc = columns[2] ? columns[2].replace(/"/g, '').trim() : '';
-                    let image = columns[3] ? columns[3].replace(/"/g, '').trim() : '';
+                    // डेटा को साफ करना (स्पेशल कोट्स और स्पेस हटाना)
+                    const name = columns[0].replace(/^["']|["']$/g, '').trim();
+                    const price = columns[1].replace(/^["']|["']$/g, '').trim();
+                    const desc = columns[2] ? columns[2].replace(/^["']|["']$/g, '').trim() : '';
+                    
+                    // इमेज लिंक की स्पेशल क्लीनिंग ताकि टूटी हुई इमेज न दिखे
+                    let image = columns[3] ? columns[3].replace(/^["']|["']$/g, '').trim() : '';
+                    image = image.replace(/[\r\n\t]/g, ''); // अदृश्य कैरेक्टर हटाना
 
-                    // अगर इमेज लिंक खाली है या सही नहीं है तो एक अच्छी बैकग्राउंड इमेज दिखे
-                    if (!image || image === '' || image.includes('placeholder')) {
+                    // अगर इमेज लिंक अभी भी खाली है, तो एक बहुत ही सुंदर डिफ़ॉल्ट परफ्यूम इमेज दिखेगी
+                    if (!image || image === "" || image.includes('placeholder')) {
                         image = 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=500&auto=format&fit=crop&q=60';
                     }
 
-                    const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=नमस्ते UB Perfumes, मुझे यह ऑर्डर करना है: ${encodeURIComponent(name)} (₹${price})`;
+                    const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=नमस्ते UB Perfumes, मुझे यह ऑर्डर करना है: ${encodeURIComponent(name)} (Rs. ${price})`;
 
                     container.innerHTML += `
                         <div class="card">
                             <div class="image-container">
-                                <img src="${image}" alt="${name}">
+                                <img src="${image}" alt="${name}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1541643600914-78b084683601?w=500&auto=format&fit=crop&q=60';">
                             </div>
                             <h3>${name}</h3>
                             <p class="desc">${desc}</p>
@@ -102,3 +111,4 @@
     </script>
 </body>
 </html>
+
