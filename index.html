@@ -2,65 +2,103 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <title>My Perfume Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UB Perfumes</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; background-color: #f9f9f9; padding: 20px; }
-        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-        .card { background: white; border-radius: 10px; padding: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 250px; }
-        .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; }
-        .btn { background-color: #25D366; color: white; padding: 10px; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 10px; }
+        /* DMF प्रीमियम थीम स्टाइल्स */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #ffffff; color: #121212; padding: 15px; }
+        
+        /* हेडर स्टाइल */
+        header { text-align: center; padding: 20px 0 30px 0; border-bottom: 1px solid #f2f2f2; margin-bottom: 25px; }
+        header h1 { font-size: 24px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+        
+        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 20px; text-align: left; padding-left: 5px; }
+        
+        /* एक लाइन में दो प्रोडक्ट दिखाने के लिए (Mobile Friendly Grid) */
+        .container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        
+        /* प्रोडक्ट कार्ड (DMF स्टाइल) */
+        .card { background: #ffffff; display: flex; flex-direction: column; text-align: left; text-decoration: none; color: inherit; }
+        
+        /* घुमावदार कोनों वाली प्रीमियम फोटो */
+        .image-container { width: 100%; position: relative; padding-top: 110%; /* फोटो का परफेक्ट रेशियो */ background-color: #f5f5f5; border-radius: 20px; overflow: hidden; margin-bottom: 10px; }
+        .card img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+        
+        /* टेक्स्ट और डिटेल्स (Left-Aligned) */
+        .card h3 { font-size: 14px; font-weight: 500; color: #2c2c2c; margin-bottom: 4px; padding: 0 4px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        .desc { font-size: 12px; color: #777; margin-bottom: 6px; padding: 0 4px; }
+        .price { font-size: 15px; font-weight: 600; color: #121212; padding: 0 4px; margin-bottom: 8px; }
+        
+        /* व्हाट्सएप बटन (साफ और आकर्षक) */
+        .btn { display: block; text-align: center; background-color: #121212; color: #ffffff; padding: 8px; border-radius: 25px; font-size: 12px; font-weight: 600; text-decoration: none; transition: background 0.2s; margin-top: auto; }
+        .btn:active { background-color: #444444; }
+        
+        #loading { text-align: center; font-size: 16px; color: #777; margin-top: 50px; }
     </style>
 </head>
 <body>
-    <h1>हमारे लग्जरी परफ्यूम्स</h1>
-    <div id="perfume-list">लोड हो रहा है...</div>
+
+    <header>
+        <h1>UB Perfumes</h1>
+    </header>
+
+    <h2 class="section-title">Solid Perfume</h2>
+    <div id="loading">लोड हो रहा है...</div>
+    <div class="container" id="perfume-list"></div>
 
     <script>
-        // 📌 अपनी शीट आईडी यहाँ डालें
+        // 📌 अपनी गूगल शीट की आईडी यहाँ डालें
         const SHEET_ID = '13rNvj9LgIuMGplhhNrScH8I8cwguZ5inDTzGphm1EqY'
-        const WHATSAPP_NUMBER = '919898647697'; // अपना नंबर
+        const WHATSAPP_NUMBER = '919898647697'; // अपना 10 अंकों का नंबर (91 के साथ) लिखें
 
-        // CSV फॉर्मेट का लिंक (यह सबसे पक्का तरीका है)
         const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
 
         fetch(url)
             .then(res => res.text())
             .then(csvText => {
+                document.getElementById('loading').style.display = 'none';
                 const rows = csvText.split('\n');
                 const container = document.getElementById('perfume-list');
-                container.innerHTML = ''; // लोडिंग हटा दें
 
                 if (rows.length <= 1) {
-                    container.innerHTML = "<p>आपकी शीट में डेटा नहीं मिल रहा है।</p>";
+                    container.innerHTML = "<p style='grid-column: span 2; text-align:center;'>अभी कोई परफ्यूम उपलब्ध नहीं है।</p>";
                     return;
                 }
 
-                // i = 1 से शुरू करें (ताकि हेडर हट जाए)
                 for (let i = 1; i < rows.length; i++) {
                     const columns = rows[i].split(',');
-                    if (columns.length < 3) continue; // अगर लाइन खाली है तो छोड़ें
+                    if (columns.length < 2 || !columns[0].trim()) continue;
 
-                    const name = columns[0];
-                    const price = columns[1];
-                    const desc = columns[2];
-                    const image = columns[3] || 'https://via.placeholder.com/300';
+                    const name = columns[0].replace(/"/g, '').trim();
+                    const price = columns[1].replace(/"/g, '').trim();
+                    const desc = columns[2] ? columns[2].replace(/"/g, '').trim() : '';
+                    let image = columns[3] ? columns[3].replace(/"/g, '').trim() : '';
+
+                    // अगर इमेज लिंक खाली है या सही नहीं है तो एक अच्छी बैकग्राउंड इमेज दिखे
+                    if (!image || image === '' || image.includes('placeholder')) {
+                        image = 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=500&auto=format&fit=crop&q=60';
+                    }
+
+                    const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=नमस्ते UB Perfumes, मुझे यह ऑर्डर करना है: ${encodeURIComponent(name)} (₹${price})`;
 
                     container.innerHTML += `
                         <div class="card">
-                            <img src="${image}" alt="${name}">
+                            <div class="image-container">
+                                <img src="${image}" alt="${name}">
+                            </div>
                             <h3>${name}</h3>
-                            <p>${desc}</p>
-                            <p><b>₹${price}</b></p>
-                            <a href="https://wa.me/${WHATSAPP_NUMBER}?text=मुझे ${name} चाहिए" class="btn">WhatsApp पर ऑर्डर करें</a>
+                            <p class="desc">${desc}</p>
+                            <div class="price">Rs. ${price}.00</div>
+                            <a href="${whatsappLink}" target="_blank" class="btn">WhatsApp ऑर्डर</a>
                         </div>
                     `;
                 }
             })
             .catch(err => {
-                document.getElementById('perfume-list').innerText = "त्रुटि: अपनी शीट पब्लिक करना न भूलें!";
+                document.getElementById('loading').innerText = "त्रुटि: डेटा लोड नहीं हो सका।";
+                console.error(err);
             });
     </script>
 </body>
 </html>
-
-<
