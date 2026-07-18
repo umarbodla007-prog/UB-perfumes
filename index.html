@@ -5,36 +5,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UB Perfumes</title>
     <style>
+        /* वैश्विक स्टाइल्स */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #ffffff; color: #121212; padding: 15px; }
-        header { text-align: center; padding: 20px 0 30px 0; border-bottom: 1px solid #f2f2f2; margin-bottom: 25px; }
-        header h1 { font-size: 24px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 20px; text-align: left; padding-left: 5px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #ffffff; color: #121212; padding-bottom: 30px; }
+        
+        /* 1. मूविंग टेक्स्ट अनाउंसमेंट बार (DMF स्टाइल) */
+        .announcement-bar { background-color: #121212; color: #ffffff; font-size: 11px; font-weight: 500; padding: 8px 0; letter-spacing: 1px; text-transform: uppercase; overflow: hidden; white-space: nowrap; }
+        .announcement-bar marquee { display: block; }
+
+        /* हेडर स्टाइल */
+        header { text-align: center; padding: 20px 0; border-bottom: 1px solid #f2f2f2; }
+        header h1 { font-size: 24px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+        
+        /* 2. ऑटोमैटिक लग्जरी फिल्म / स्लाइडर (Hero Banner) */
+        .hero-slider { width: 100%; height: 260px; position: relative; overflow: hidden; background-color: #f5f5f5; margin-bottom: 25px; }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease-in-out; display: flex; align-items: center; justify-content: center; }
+        .slide.active { opacity: 1; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; }
+        /* बैनर के ऊपर टेक्स्ट ओवरले */
+        .slide-overlay { position: absolute; bottom: 20px; left: 20px; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
+        .slide-overlay h2 { font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .slide-overlay p { font-size: 12px; margin-top: 2px; opacity: 0.9; }
+
+        /* मुख्य कंटेंट लेआउट */
+        .main-content { padding: 0 15px; }
+        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 20px; text-align: left; letter-spacing: 0.5px; }
+        
+        /* मोबाइल ग्रिड (एक लाइन में दो प्रोडक्ट) */
         .container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        
+        /* प्रोडक्ट कार्ड स्टाइल */
         .card { background: #ffffff; display: flex; flex-direction: column; text-align: left; text-decoration: none; color: inherit; margin-bottom: 15px; }
-        .image-container { width: 100%; position: relative; padding-top: 110%; background-color: #f5f5f5; border-radius: 20px; overflow: hidden; margin-bottom: 10px; }
-        .card img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+        .image-container { width: 100%; position: relative; padding-top: 110%; background-color: #f8f8f8; border-radius: 20px; overflow: hidden; margin-bottom: 10px; }
+        .card img.product-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+        
+        /* प्रोडक्ट टेक्स्ट डिटेल्स */
         .card h3 { font-size: 14px; font-weight: 500; color: #2c2c2c; margin-bottom: 4px; padding: 0 4px; line-height: 1.3; }
-        .desc { font-size: 12px; color: #777; margin-bottom: 6px; padding: 0 4px; }
-        .price { font-size: 15px; font-weight: 600; color: #121212; padding: 0 4px; margin-bottom: 8px; }
-        .btn { display: block; text-align: center; background-color: #121212; color: #ffffff; padding: 8px; border-radius: 25px; font-size: 12px; font-weight: 600; text-decoration: none; margin-top: auto; }
-        #loading { text-align: center; font-size: 16px; color: #777; margin-top: 50px; }
+        .desc { font-size: 11px; color: #777; margin-bottom: 6px; padding: 0 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .price { font-size: 14px; font-weight: 600; color: #121212; padding: 0 4px; margin-bottom: 8px; }
+        
+        /* ब्लैक राउंडेड व्हाट्सएप बटन */
+        .btn { display: block; text-align: center; background-color: #121212; color: #ffffff; padding: 9px; border-radius: 25px; font-size: 12px; font-weight: 600; text-decoration: none; margin-top: auto; border: 1px solid #121212; }
+        .btn:active { background-color: #333333; }
+        
+        #loading { text-align: center; font-size: 15px; color: #777; margin-top: 40px; }
     </style>
 </head>
 <body>
 
+    <!-- 1. टॉप मूविंग टेक्स्ट बार -->
+    <div class="announcement-bar">
+        <marquee scrollamount="4">✨ Welcome to UB Perfumes | Experience Premium & Luxury Fragrances | Order via WhatsApp for Quick Delivery ✨</marquee>
+    </div>
+
+    <!-- हेडर -->
     <header>
         <h1>UB Perfumes</h1>
     </header>
 
-    <h2 class="section-title">Our Luxury Collection</h2>
-    <div id="loading">लोड हो रहा है...</div>
-    <div class="container" id="perfume-list"></div>
+    <!-- 2. ऑटोमैटिक फिल्म की तरह चलने वाला इमेज स्लाइडर -->
+    <div class="hero-slider">
+        <!-- स्लाइड 1 -->
+        <div class="slide active">
+            <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800&auto=format&fit=crop&q=70" alt="Luxury Collection">
+            <div class="slide-overlay">
+                <h2>UB Official</h2>
+                <p>The Signature Elegance</p>
+            </div>
+        </div>
+        <!-- स्लाइड 2 -->
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&auto=format&fit=crop&q=70" alt="Premium Scents">
+            <div class="slide-overlay">
+                <h2>Exquisite Oud</h2>
+                <p>Long Lasting Luxury</p>
+            </div>
+        </div>
+        <!-- स्लाइड 3 -->
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?w=800&auto=format&fit=crop&q=70" alt="New Arrival">
+            <div class="slide-overlay">
+                <h2>Best Sellers</h2>
+                <p>Crafted For The Masters</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- मुख्य प्रोडक्ट्स सेक्शन -->
+    <div class="main-content">
+        <h2 class="section-title">Our Luxury Collection</h2>
+        <div id="loading">परफ्यूम्स लोड हो रहे हैं...</div>
+        <div class="container" id="perfume-list"></div>
+    </div>
 
     <script>
-        const SHEET_ID = '13rNvj9LgIuMGplhhNrScH8I8cwguZ5inDTzGphm1EqY' 
-        const WHATSAPP_NUMBER = '919898647697'; // अपना नंबर लिखें (बिना + के, जैसे 919876543210)
+        // 📌 अपनी गूगल शीट की आईडी और व्हाट्सएप नंबर यहाँ लिखें
+        const SHEET_ID = '13rNvj9LgIuMGplhhNrScH8I8cwguZ5inDTzGphm1EqY'; 
+        const WHATSAPP_NUMBER = '919898647697'; // 10 अंकों का नंबर 91 लगाकर लिखें
 
+        // ऑटोमैटिक स्लाइडर चलाने का लॉजिक (फिल्म की तरह बदलना)
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 3000); // 3000ms = हर 3 सेकंड में बदलेगा
+
+        // गूगल शीट से डेटा लोड करने का लॉजिक
         const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
 
         fetch(url)
@@ -42,7 +120,6 @@
             .then(csvText => {
                 document.getElementById('loading').style.display = 'none';
                 const rows = csvText.split(/\r?\n/).map(row => {
-                    // CSV की लाइनों को सही से बांटने के लिए फ़ंक्शन
                     return row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                 });
 
@@ -52,7 +129,6 @@
                     return;
                 }
 
-                // पहली लाइन (Headers) से कॉलम का सही नंबर पता करना
                 const headers = rows[0].map(h => h.replace(/^["']|["']$/g, '').trim().toLowerCase());
                 const nameIdx = headers.indexOf('name');
                 const priceIdx = headers.indexOf('price');
@@ -66,11 +142,12 @@
                     const name = columns[nameIdx].replace(/^["']|["']$/g, '').trim();
                     const price = columns[priceIdx] ? columns[priceIdx].replace(/^["']|["']$/g, '').trim() : '0';
                     const desc = columns[descIdx] ? columns[descIdx].replace(/^["']|["']$/g, '').trim() : '';
-                    let image = columns[imgIdx] ? columns[imgIdx].replace(/^["']|["']$/g, '').trim() : '';
                     
-                    image = image.replace(/[\r\n\t]/g, ''); // कचरा कैरेक्टर्स साफ करना
+                    // इमेज लिंक की सफाई और ट्रिमिंग
+                    let image = columns[imgIdx] ? columns[imgIdx].replace(/^["']|["']$/g, '').trim() : '';
+                    image = image.replace(/[\r\n\t\s]/g, ''); // फालतू स्पेस या अदृश्य कैरेक्टर हटाना
 
-                    // अगर लिंक अभी भी खाली है या गड़बड़ है तो डिफ़ॉल्ट इमेज
+                    // अगर लिंक खाली या इनवैलिड है तो प्रीमियम डिफ़ॉल्ट फोटो दिखेगी
                     if (!image || image === "" || image.toLowerCase().includes('placeholder')) {
                         image = 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=500&auto=format&fit=crop&q=60';
                     }
@@ -80,7 +157,7 @@
                     container.innerHTML += `
                         <div class="card">
                             <div class="image-container">
-                                <img src="${image}" alt="${name}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1541643600914-78b084683601?w=500&auto=format&fit=crop&q=60';">
+                                <img class="product-img" src="${image}" alt="${name}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1541643600914-78b084683601?w=500&auto=format&fit=crop&q=60';">
                             </div>
                             <h3>${name}</h3>
                             <p class="desc">${desc}</p>
