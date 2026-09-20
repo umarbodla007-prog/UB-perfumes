@@ -13,31 +13,18 @@
     <meta name="keywords" content="UB Perfumes, buy perfume online, luxury fragrances, Royal kastur, choco rush">
     <meta name="robots" content="index, follow">
 
-    <!-- PapaParse Library for error-free CSV parsing -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: sans-serif; background-color: #ffffff; color: #121212; padding-bottom: 30px; }
-        header { text-align: center; padding: 20px 0 15px 0; border-bottom: 1px solid #f2f2f2; }
+        body { font-family: sans-serif; background-color: #ffffff; color: #121212; padding: 20px 15px 30px 15px; }
+        header { text-align: center; padding-bottom: 20px; margin-bottom: 25px; border-bottom: 1px solid #f2f2f2; }
         h1 { font-size: 24px; letter-spacing: 2px; }
-        
-        /* बैनर स्लाइडर */
-        .hero-slider { width: 100%; height: 180px; position: relative; overflow: hidden; margin-bottom: 25px; }
-        .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; }
-        .slide.active { opacity: 1; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; }
 
-        .main-content { padding: 0 15px; }
         .container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
         .card { border: 1px solid #eee; border-radius: 15px; padding: 10px; display: flex; flex-direction: column; position: relative; }
         .image-container { width: 100%; padding-top: 100%; position: relative; overflow: hidden; border-radius: 10px; margin-bottom: 10px; }
         .product-img { position: absolute; top:0; left:0; width: 100%; height: 100%; object-fit: cover; }
         
-        /* बटन के स्टाइल */
         .btn { display: block; background: #121212; color: #fff; text-align: center; padding: 8px; border-radius: 20px; text-decoration: none; font-size: 12px; margin-top: auto; }
-        
-        /* आउट ऑफ स्टॉक स्टाइल */
         .card.out-of-stock .product-img { filter: grayscale(84%); opacity: 0.6; }
         .btn-out { background: #e53935; color: #fff; cursor: not-allowed; text-align: center; padding: 8px; border-radius: 20px; font-size: 12px; margin-top: auto; font-weight: bold; }
         .stock-tag { position: absolute; top: 15px; left: 15px; background: #e53935; color: white; padding: 3px 8px; font-size: 10px; border-radius: 5px; font-weight: bold; z-index: 2; }
@@ -47,58 +34,35 @@
 
     <header><h1>UB PERFUMES</h1></header>
 
-    <!-- वर्किंग बैनर स्लाइडर -->
-    <div class="hero-slider">
-        <div class="slide active">
-            <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?q=80&w=800" alt="UB Perfumes Banner 1">
-        </div>
-        <div class="slide">
-            <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?q=80&w=800" alt="UB Perfumes Banner 2">
-        </div>
-    </div>
-
-    <div class="main-content">
-        <div class="container" id="perfume-list"></div>
-    </div>
+    <div class="container" id="perfume-list"></div>
 
     <script>
-        // 📌 सेटिंग्स
         const SHEET_ID = '1-jZ03O0D7cOsk3h7-aKk0hHl_hCg0Ld2-k01-tQ4xVk'; 
-        const WHATSAPP_NUMBER = '919898647697'; // यहाँ अपना WhatsApp नंबर डालें
+        const WHATSAPP_NUMBER = '919898647697'; // अपना WhatsApp नंबर डालें
 
-        // स्लाइडर एनिमेशन
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        if(slides.length > 0) {
-            setInterval(() => {
-                slides[currentSlide].classList.remove('active');
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].classList.add('active');
-            }, 3000);
-        }
-
-        // CSV Parser
-        const csvUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
-
-        Papa.parse(csvUrl, {
-            download: true,
-            header: false,
-            complete: function(results) {
-                const rows = results.data;
+        fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`)
+            .then(res => res.text())
+            .then(csv => {
+                const lines = csv.split(/\r?\n/);
+                if (lines.length <= 1) return;
+                
                 const container = document.getElementById('perfume-list');
-                container.innerHTML = ''; 
-
-                for (let i = 1; i < rows.length; i++) {
-                    const cols = rows[i];
-                    if (!cols || cols.length < 2) continue;
-
-                    const name = cols[0] ? cols[0].trim() : '';
-                    const price = cols[1] ? cols[1].trim() : '';
-                    const img = cols[3] && cols[3].trim() !== '' ? cols[3].trim() : 'https://via.placeholder.com/200';
-                    const stockStatus = cols[4] ? cols[4].trim().toLowerCase() : '';
+                container.innerHTML = '';
+                
+                for(let i = 1; i < lines.length; i++) {
+                    const row = lines[i];
+                    if (!row.trim()) continue;
+                    
+                    const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                    if (cols.length < 2) continue;
+                    
+                    const name = cols[0].replace(/['"]+/g, '').trim();
+                    const price = cols[1].replace(/['"]+/g, '').trim();
+                    const img = cols[3] ? cols[3].replace(/['"]+/g, '').trim() : 'https://via.placeholder.com/200';
+                    const stockStatus = cols[4] ? cols[4].replace(/['"]+/g, '').trim().toLowerCase() : '';
                     const isOutOfStock = stockStatus.includes('out');
 
-                    if (!name || name.toLowerCase().includes('function') || name.toLowerCase().includes('object')) continue;
+                    if(!name) continue;
 
                     let actionButton = `<a href="https://wa.me/${WHATSAPP_NUMBER}?text=मुझे ${encodeURIComponent(name)} चाहिए" target="_blank" class="btn">WhatsApp</a>`;
                     let badge = '';
@@ -113,15 +77,15 @@
                     container.innerHTML += `
                         <div class="${cardClass}">
                             ${badge}
-                            <div class="image-container"><img class="product-img" src="${img}" alt="${name}"></div>
-                            <h3>${name}</h3>
-                            <p>Rs. ${price}</p>
+                            <div class="image-container"><img class="product-img" src="${img}"></div>
+                            <h3 style="font-size:14px; margin-bottom:5px;">${name}</h3>
+                            <p style="font-size:13px; color:#555; margin-bottom:8px;">Rs. ${price}</p>
                             ${actionButton}
                         </div>
                     `;
                 }
-            }
-        });
+            })
+            .catch(err => console.error("डेटा लोड करने में समस्या:", err));
     </script>
 </body>
 </html>
