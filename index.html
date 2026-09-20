@@ -479,7 +479,7 @@
     <header>
         <div class="royal-crest"></div>
         <div class="brand-title">UB PERFUMES</div>
-        <div class="brand-subtitle">HAUTE PARFUMERIE • PARIS & ANAND</div>
+        <div class="brand-subtitle">HAUTE PARFUMERIE • ANAND</div>
         
         <div class="gold-line-wrapper">
             <div class="gold-line"></div>
@@ -528,13 +528,9 @@
     </div>
 
     <script>
-        // ========================================================
-        // CONFIGURATION: SHEET ID & YOUR WHATSAPP NUMBER
-        // ========================================================
         const SHEET_ID = '13rNvj9LgIuMGplhhNrScH8I8cwguZ5inDTzGphm1EqY'; 
-        const WHATSAPP_NUMBER = '919898647697'; // आपका असली WhatsApp नंबर यहाँ सेट हो गया है!
+        const WHATSAPP_NUMBER = '919898647697'; // आपका असली WhatsApp नंबर यहाँ सेट है
 
-        // Background Particles Effect
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -602,5 +598,9 @@
         setInterval(showNextSlide, 4500);
 
         window.renderPerfumes = function(data) {
-            const container = document.getElementById(
-            
+            const container = document.getElementById('perfume-list');
+            container.innerHTML = '';
+
+            if (!data || !data.table || !data.table.rows || data.table.rows.length === 0) {
+                container.innerHTML = '<div class="loading">COLLECTION CURRENTLY UNAVAILABLE</div>';
+        
