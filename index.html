@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- गूगल साइट वेरिफिकेशन टैग -->
-    <meta name="google-site-verification" content="<meta name="google-site-verification" content="K3TaRCv0iyq29o8nM_OL7_dqZcPhPGoS5_iiDNVAOkw" />
+    <meta name="google-site-verification" content="K3TaRCvOiyp29o8nM_OL7_dqZcPhPGoSS_iiDNVADkw" />
 
     <!-- गूगल खोज (SEO) सेटिंग्स -->
     <title>UB Perfumes - Buy Premium & Luxury Fragrances Online</title>
     <meta name="description" content="Buy premium, long-lasting luxury perfumes online at UB Perfumes. Explore our exclusive collection. Order easily via WhatsApp.">
     <meta name="keywords" content="UB Perfumes, buy perfume online, luxury fragrances, Royal kastur, choco rush">
     <meta name="robots" content="index, follow">
+
+    <!-- PapaParse Library for accurate CSV parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -61,7 +64,7 @@
     <script>
         // 📌 सेटिंग्स
         const SHEET_ID = '1-jZ03O0D7cOsk3h7-aKk0hHl_hCg0Ld2-k01-tQ4xVk'; 
-        const WHATSAPP_NUMBER = '919898647697'; // अपना WhatsApp नंबर डालें
+        const WHATSAPP_NUMBER = '919898647697'; // यहाँ अपना असली WhatsApp नंबर डालें
 
         // स्लाइडर कोड
         let currentSlide = 0;
@@ -74,30 +77,29 @@
             }, 3000);
         }
 
-        // Google Sheet डेटा फ़ैच करने का कोड
-        fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`)
-            .then(res => res.text())
-            .then(csv => {
-                const lines = csv.split(/\r?\n/);
-                if (lines.length <= 1) return;
-                
+        // CSV Fetch using PapaParse
+        const csvUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
+
+        Papa.parse(csvUrl, {
+            download: true,
+            header: false,
+            complete: function(results) {
+                const rows = results.data;
                 const container = document.getElementById('perfume-list');
-                
-                for(let i = 1; i < lines.length; i++) {
-                    const row = lines[i];
-                    if (!row.trim()) continue;
-                    
-                    const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                    if (cols.length < 2) continue;
-                    
-                    const name = cols[0].replace(/['"]+/g, '').trim();
-                    const price = cols[1].replace(/['"]+/g, '').trim();
-                    const img = cols[3] ? cols[3].replace(/['"]+/g, '').trim() : 'https://via.placeholder.com/200';
-                    
-                    const stockStatus = cols[4] ? cols[4].replace(/['"]+/g, '').trim().toLowerCase() : '';
+                container.innerHTML = ''; 
+
+                for (let i = 1; i < rows.length; i++) {
+                    const cols = rows[i];
+                    if (!cols || cols.length < 2) continue;
+
+                    const name = cols[0] ? cols[0].trim() : '';
+                    const price = cols[1] ? cols[1].trim() : '';
+                    const img = cols[3] && cols[3].trim() !== '' ? cols[3].trim() : 'https://via.placeholder.com/200';
+                    const stockStatus = cols[4] ? cols[4].trim().toLowerCase() : '';
                     const isOutOfStock = stockStatus.includes('out');
 
-                    if(!name) continue;
+                    // अगर नाम खाली है या कोई गलत टेक्स्ट है तो स्किप करें
+                    if (!name || name.includes('function') || name.includes('Object')) continue;
 
                     let actionButton = `<a href="https://wa.me/${WHATSAPP_NUMBER}?text=मुझे ${encodeURIComponent(name)} चाहिए" target="_blank" class="btn">WhatsApp</a>`;
                     let badge = '';
@@ -112,15 +114,16 @@
                     container.innerHTML += `
                         <div class="${cardClass}">
                             ${badge}
-                            <div class="image-container"><img class="product-img" src="${img}"></div>
+                            <div class="image-container"><img class="product-img" src="${img}" alt="${name}"></div>
                             <h3>${name}</h3>
                             <p>Rs. ${price}</p>
                             ${actionButton}
                         </div>
                     `;
                 }
-            })
-            .catch(err => console.error("डेटा लोड करने में समस्या:", err));
+            }
+        });
     </script>
 </body>
 </html>
+
