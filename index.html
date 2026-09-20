@@ -76,21 +76,22 @@
             padding: 30px 14px 70px 14px;
         }
 
-        /* Cinematic High-End Banner */
+        /* --- Ultra-Luxury Cinematic Slider --- */
         .slider-stage {
             width: 100%;
             margin-bottom: 40px;
-            border-radius: 16px;
-            padding: 1px;
+            border-radius: 18px;
+            padding: 1.5px;
             background: var(--gold-gradient);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.95);
+            box-shadow: 0 35px 70px rgba(0,0,0,0.98), 0 0 30px rgba(212, 175, 55, 0.15);
+            position: relative;
         }
 
         .slider-inner {
             width: 100%;
-            height: 280px;
-            background: #08080a;
-            border-radius: 15px;
+            height: 310px;
+            background: #040405;
+            border-radius: 17px;
             position: relative;
             overflow: hidden;
         }
@@ -100,33 +101,83 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             opacity: 0;
-            transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            visibility: hidden;
+            transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.8s;
         }
 
-        .slide.active { opacity: 1; z-index: 1; }
+        .slide.active { 
+            opacity: 1; 
+            visibility: visible; 
+            z-index: 1; 
+        }
 
         .slide-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: contrast(1.05) brightness(0.95);
+            filter: contrast(1.08) brightness(0.92);
+            transform: scale(1);
+            transition: transform 6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .slide.active .slide-img {
+            transform: scale(1.08); /* Slow cinematic zoom effect */
         }
 
         .slide-overlay {
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            padding: 30px 20px 18px 20px;
-            background: linear-gradient(to top, rgba(5,5,7,0.98) 10%, rgba(5,5,7,0.6) 60%, transparent 100%);
+            padding: 35px 22px 20px 22px;
+            background: linear-gradient(to top, rgba(3,3,4,0.95) 15%, rgba(3,3,4,0.6) 70%, transparent 100%);
+            backdrop-filter: blur(3px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .slide-tag {
+            font-size: 7px;
+            letter-spacing: 4px;
+            color: #aaa;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            font-weight: 500;
         }
 
         .slide-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 19px;
+            font-size: 20px;
             font-weight: 600;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+        }
+
+        /* Slider Navigation Dots */
+        .slider-dots {
+            position: absolute;
+            bottom: 12px;
+            right: 15px;
+            display: flex;
+            gap: 5px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transition: all 0.4s ease;
+        }
+
+        .dot.active {
+            width: 16px;
+            border-radius: 4px;
+            background: var(--gold-solid);
+            box-shadow: 0 0 8px var(--gold-solid);
         }
 
         /* Section Title Styling */
@@ -235,9 +286,9 @@
         }
 
         .perfume-volume {
-            font-size: 7.5px;
+            font-size: 7px;
             color: #888;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
@@ -343,19 +394,28 @@
     </header>
 
     <div class="wrapper">
+        <!-- Cinematic Luxury Slider Stage -->
         <div class="slider-stage">
-            <div class="slider-inner">
+            <div class="slider-inner" id="slider-container">
                 <div class="slide active">
                     <img class="slide-img" src="https://i.postimg.cc/Gm6NLs43/1784547021297.png" alt="Royal Kasturi">
                     <div class="slide-overlay">
+                        <div class="slide-tag">Featured Masterpiece</div>
                         <div class="slide-title">Royal Kasturi Essence</div>
                     </div>
                 </div>
                 <div class="slide">
                     <img class="slide-img" src="https://i.postimg.cc/rmnw3h5j/1785151122893.png" alt="Chocolate Fragrance">
                     <div class="slide-overlay">
+                        <div class="slide-tag">Private Creation</div>
                         <div class="slide-title">Artisan Chocolate</div>
                     </div>
+                </div>
+                
+                <!-- Dynamic Slider Indicators -->
+                <div class="slider-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
                 </div>
             </div>
         </div>
@@ -378,14 +438,22 @@
         const SHEET_ID = '13rNvj9LgIuMGplhhNrScH8I8cwguZ5inDTzGphm1EqY'; 
         const WHATSAPP_NUMBER = '919898647697'; 
 
-        // Cinematic Slider Animation
+        // Cinematic Ultra-Smooth Slider Engine
         const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
         let currentSlide = 0;
-        setInterval(() => {
+
+        function nextSlide() {
             slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            
             currentSlide = (currentSlide + 1) % slides.length;
+            
             slides[currentSlide].classList.add('active');
-        }, 4500);
+            dots[currentSlide].classList.add('active');
+        }
+
+        setInterval(nextSlide, 5000); // Changes every 5 seconds with smooth cinematic transition
 
         // Lightning-Fast Google Sheet Data Render
         window.renderPerfumes = function(data) {
@@ -426,7 +494,7 @@
                         <div class="perfume-title">${name}</div>
                         <div class="perfume-price-row">
                             <span class="perfume-price">₹ ${price}</span>
-                            <span class="perfume-volume">ATTAR</span>
+                            <span class="perfume-volume">SPRAY PERFUME</span>
                         </div>
                         ${actionButton}
                     </div>
