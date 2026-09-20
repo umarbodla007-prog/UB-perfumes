@@ -43,68 +43,60 @@
         const SHEET_ID = '1-jZ03O0D7cOsk3h7-aKk0hHl_hCg0Ld2-k01-tQ4xVk'; 
         const WHATSAPP_NUMBER = '919898647697'; // अपना WhatsApp नंबर डालें
 
-        // Direct CSV Fetch Link (No Publish to Web Needed)
-        const csvUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
+        // JSONP Callback setup to bypass CORS and loads instantly
+        window.handleSheetData = function(data) {
+            const container = document.getElementById('perfume-list');
+            container.innerHTML = '';
 
-        fetch(csvUrl)
-            .then(res => {
-                if(!res.ok) throw new Error('Sheet Access Error');
-                return res.text();
-            })
-            .then(csv => {
-                // Read CSV Lines safely
-                const lines = csv.split(/\r?\n/);
-                const container = document.getElementById('perfume-list');
-                container.innerHTML = '';
+            if (!data || !data.table || !data.table.rows || data.table.rows.length === 0) {
+                container.innerHTML = '<div class="loading">शीट में कोई उत्पाद नहीं मिला।</div>';
+                return;
+            }
+
+            const rows = data.table.rows;
+
+            rows.forEach((row) => {
+                const cols = row.c;
+                if (!cols || !cols[0] || !cols[0].v) return;
+
+                const name = cols[0] ? String(cols[0].v).trim() : '';
+                const price = cols[1] && cols[1].v !== null ? String(cols[1].v).trim() : '';
+                const img = cols[3] && cols[3].v ? String(cols[3].v).trim() : 'https://via.placeholder.com/200';
+                const stockStatus = cols[4] && cols[4].v ? String(cols[4].v).trim().toLowerCase() : '';
                 
-                if (lines.length <= 1) {
-                    container.innerHTML = '<div class="loading">शीट में कोई प्रोडक्ट उपलब्ध नहीं है।</div>';
-                    return;
+                const isOutOfStock = stockStatus.includes('out');
+
+                if (!name) return;
+
+                let actionButton = `<a href="https://wa.me/${WHATSAPP_NUMBER}?text=मुझे ${encodeURIComponent(name)} चाहिए" target="_blank" class="btn">WhatsApp</a>`;
+                let badge = '';
+                let cardClass = 'card';
+
+                if (isOutOfStock) {
+                    actionButton = `<div class="btn-out">Out of Stock</div>`;
+                    badge = `<div class="stock-tag">OUT OF STOCK</div>`;
+                    cardClass = 'card out-of-stock';
                 }
 
-                // Loop through rows (Skip header row 0)
-                for (let i = 1; i < lines.length; i++) {
-                    const row = lines[i];
-                    if (!row || !row.trim()) continue;
-
-                    // Regex to parse CSV columns properly
-                    const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                    if (cols.length < 2) continue;
-
-                    const name = cols[0] ? cols[0].replace(/^"|"$/g, '').trim() : '';
-                    const price = cols[1] ? cols[1].replace(/^"|"$/g, '').trim() : '';
-                    const img = cols[3] && cols[3].trim() !== '' ? cols[3].replace(/^"|"$/g, '').trim() : 'https://via.placeholder.com/200';
-                    const stockStatus = cols[4] ? cols[4].replace(/^"|"$/g, '').trim().toLowerCase() : '';
-                    
-                    const isOutOfStock = stockStatus.includes('out');
-
-                    if (!name) continue;
-
-                    let actionButton = `<a href="https://wa.me/${WHATSAPP_NUMBER}?text=मुझे ${encodeURIComponent(name)} चाहिए" target="_blank" class="btn">WhatsApp</a>`;
-                    let badge = '';
-                    let cardClass = 'card';
-
-                    if (isOutOfStock) {
-                        actionButton = `<div class="btn-out">Out of Stock</div>`;
-                        badge = `<div class="stock-tag">OUT OF STOCK</div>`;
-                        cardClass = 'card out-of-stock';
-                    }
-
-                    container.innerHTML += `
-                        <div class="${cardClass}">
-                            ${badge}
-                            <div class="image-container"><img class="product-img" src="${img}" alt="${name}"></div>
-                            <h3 style="font-size:14px; margin-bottom:5px;">${name}</h3>
-                            <p style="font-size:13px; color:#555; margin-bottom:8px;">Rs. ${price}</p>
-                            ${actionButton}
-                        </div>
-                    `;
-                }
-            })
-            .catch(err => {
-                console.error("Error loading products:", err);
-                document.getElementById('perfume-list').innerHTML = '<div class="loading">उत्पाद लोड करने में समस्या आई। कृपया चेक करें कि Sheet "Anyone with the link" पर सेट है या नहीं।</div>';
+                container.innerHTML += `
+                    <div class="${cardClass}">
+                        ${badge}
+                        <div class="image-container"><img class="product-img" src="${img}" alt="${name}"></div>
+                        <h3 style="font-size:14px; margin-bottom:5px;">${name}</h3>
+                        <p style="font-size:13px; color:#555; margin-bottom:8px;">Rs. ${price}</p>
+                        ${actionButton}
+                    </div>
+                `;
             });
+        };
+
+        // Load Script dynamically
+        const script = document.createElement('script');
+        script.src = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=responseHandler:handleSheetData`;
+        script.onerror = function() {
+            document.getElementById('perfume-list').innerHTML = '<div class="loading">उत्पाद लोड करने में समस्या आई। कृपया शीट का शेयरिंग एक्सेस चेक करें।</div>';
+        };
+        document.body.appendChild(script);
     </script>
 </body>
 </html>
