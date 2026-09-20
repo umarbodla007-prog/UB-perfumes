@@ -11,19 +11,20 @@
     <title>UB PERFUMES — Haute Parfumerie Royale</title>
     <meta name="description" content="The World's Rarest Bespoke Fragrances. Handcrafted Royal Masterpieces by UB Perfumes.">
 
-    <!-- Ultra-Luxury Fonts -->
+    <!-- Luxury Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --gold-gradient: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+            --gold-gradient: linear-gradient(135deg, #d4af37 0%, #fff2a3 25%, #aa771c 50%, #fcf6ba 75%, #8d6219 100%);
             --gold-solid: #d4af37;
             --gold-light: #f3e5ab;
-            --bg-deep: #010101;
-            --card-surface: #0a0a0c;
-            --border-gold: rgba(212, 175, 55, 0.4);
+            --bg-deep: #050507;
+            --card-surface: #0c0c0f;
+            --border-gold: rgba(212, 175, 55, 0.25);
+            --border-gold-hover: rgba(212, 175, 55, 0.8);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -31,63 +32,65 @@
         body { 
             font-family: 'Montserrat', sans-serif; 
             background-color: var(--bg-deep);
-            color: #f5f5f5; 
+            color: #e5e5e5; 
             min-height: 100vh;
             overflow-x: hidden;
-            background-image: radial-gradient(circle at 50% -10%, rgba(212, 175, 55, 0.15) 0%, transparent 50%);
+            background-image: 
+                radial-gradient(circle at 50% -20%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 50% 100%, rgba(170, 119, 28, 0.08) 0%, transparent 50%);
         }
 
         header { 
             text-align: center; 
-            padding: 45px 20px 25px 20px; 
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            background: #020202;
+            padding: 50px 20px 30px 20px; 
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            background: linear-gradient(to bottom, #030304, #08080a);
             position: relative;
         }
 
         .brand-title { 
-            font-family: 'Cinzel', serif; 
-            font-size: 30px; 
-            letter-spacing: 8px; 
-            font-weight: 900; 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 34px; 
+            letter-spacing: 10px; 
+            font-weight: 700; 
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-            margin-bottom: 8px;
-            filter: drop-shadow(0 4px 15px rgba(212, 175, 55, 0.4));
+            margin-bottom: 6px;
+            filter: drop-shadow(0 2px 10px rgba(212, 175, 55, 0.3));
         }
 
         .brand-subtitle {
-            font-family: 'Cinzel', serif;
-            font-size: 10px;
-            letter-spacing: 5px;
-            color: #999;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 9px;
+            letter-spacing: 6px;
+            color: #888;
             text-transform: uppercase;
-            font-weight: 500;
+            font-weight: 400;
         }
 
         .wrapper {
-            max-width: 460px;
+            max-width: 480px;
             margin: 0 auto;
-            padding: 25px 14px 60px 14px;
+            padding: 30px 14px 70px 14px;
         }
 
-        /* Royal Slider Stage */
+        /* Cinematic High-End Banner */
         .slider-stage {
             width: 100%;
-            margin-bottom: 35px;
-            border-radius: 18px;
+            margin-bottom: 40px;
+            border-radius: 16px;
             padding: 1px;
             background: var(--gold-gradient);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.9);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.95);
         }
 
         .slider-inner {
             width: 100%;
-            height: 260px;
-            background: #050505;
-            border-radius: 17px;
+            height: 280px;
+            background: #08080a;
+            border-radius: 15px;
             position: relative;
             overflow: hidden;
         }
@@ -97,7 +100,7 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             opacity: 0;
-            transition: opacity 1.2s ease-in-out;
+            transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .slide.active { opacity: 1; z-index: 1; }
@@ -106,64 +109,77 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            filter: contrast(1.05) brightness(0.95);
         }
 
         .slide-overlay {
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            padding: 25px 20px 15px 20px;
-            background: linear-gradient(to top, rgba(2,2,2,0.95), transparent);
+            padding: 30px 20px 18px 20px;
+            background: linear-gradient(to top, rgba(5,5,7,0.98) 10%, rgba(5,5,7,0.6) 60%, transparent 100%);
         }
 
         .slide-title {
-            font-family: 'Cinzel', serif;
-            font-size: 16px;
-            font-weight: 700;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 19px;
+            font-weight: 600;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
         }
 
-        /* Section Heading */
+        /* Section Title Styling */
         .section-header {
             text-align: center;
-            margin: 30px 0 20px 0;
+            margin: 35px 0 25px 0;
+            position: relative;
         }
 
         .section-header h2 {
-            font-family: 'Cinzel', serif;
-            font-size: 12px;
-            letter-spacing: 4px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 14px;
+            letter-spacing: 5px;
             color: var(--gold-light);
             text-transform: uppercase;
-            font-weight: 700;
+            font-weight: 600;
         }
 
-        /* Strict Grid to Prevent Overflow */
+        .section-header::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 1px;
+            background: var(--gold-solid);
+            margin: 8px auto 0 auto;
+            opacity: 0.5;
+        }
+
+        /* Strict Grid Layout */
         .container { 
             display: grid; 
             grid-template-columns: repeat(2, 1fr); 
-            gap: 12px; 
+            gap: 14px; 
             width: 100%;
         }
         
         .perfume-card { 
             background: var(--card-surface); 
             border: 1px solid var(--border-gold); 
-            border-radius: 16px; 
+            border-radius: 14px; 
             padding: 12px; 
             display: flex; 
             flex-direction: column; 
             position: relative;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.85);
             overflow: hidden;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .perfume-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--gold-solid);
+            transform: translateY(-5px);
+            border-color: var(--border-gold-hover);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.12);
         }
 
         .image-container { 
@@ -172,9 +188,9 @@
             position: relative; 
             overflow: hidden; 
             border-radius: 10px; 
-            margin-bottom: 10px; 
+            margin-bottom: 12px; 
             background: #000;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.03);
         }
 
         .product-img { 
@@ -182,7 +198,7 @@
             top: 0; left: 0; 
             width: 100%; height: 100%; 
             object-fit: cover; 
-            transition: transform 0.6s ease;
+            transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .perfume-card:hover .product-img {
@@ -190,12 +206,12 @@
         }
 
         .perfume-title {
-            font-family: 'Cinzel', serif; 
-            font-size: 12px; 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 14px; 
             margin-bottom: 6px; 
-            font-weight: 700; 
+            font-weight: 600; 
             color: #fff; 
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -206,109 +222,115 @@
             display: flex;
             align-items: baseline;
             justify-content: space-between;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .perfume-price {
-            font-family: 'Cinzel', serif;
-            font-size: 15px; 
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 17px; 
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 900;
+            font-weight: 700;
         }
 
         .perfume-volume {
-            font-size: 7px;
-            color: #777;
-            letter-spacing: 1.5px;
+            font-size: 7.5px;
+            color: #888;
+            letter-spacing: 2px;
             text-transform: uppercase;
         }
 
-        /* Clean WhatsApp Order Button */
+        /* Ultra-Luxury Order Button */
         .btn { 
             display: block; 
             background: var(--gold-gradient); 
-            color: #030303; 
+            color: #030304; 
             text-align: center; 
             padding: 10px 4px; 
-            border-radius: 25px; 
+            border-radius: 20px; 
             text-decoration: none; 
-            font-size: 8.5px; 
-            font-weight: 900; 
+            font-size: 8px; 
+            font-weight: 700; 
             margin-top: auto; 
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-            transition: opacity 0.2s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+            transition: all 0.3s ease;
         }
 
-        .btn:active { opacity: 0.8; }
+        .btn:hover {
+            filter: brightness(1.1);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn:active { transform: scale(0.98); }
         
-        .perfume-card.out-of-stock .product-img { filter: grayscale(100%); opacity: 0.3; }
+        .perfume-card.out-of-stock .product-img { filter: grayscale(100%) brightness(0.4); }
         .btn-out { 
-            background: #0d0d0f; 
-            border: 1px solid #222;
-            color: #444; 
+            background: #09090b; 
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #555; 
             cursor: not-allowed; 
             text-align: center; 
             padding: 10px 4px; 
-            border-radius: 25px; 
-            font-size: 8.5px; 
+            border-radius: 20px; 
+            font-size: 8px; 
             margin-top: auto; 
-            font-weight: 700; 
-            letter-spacing: 1px;
+            font-weight: 600; 
+            letter-spacing: 1.5px;
         }
 
         .stock-tag { 
             position: absolute; 
             top: 14px; left: 14px; 
-            background: rgba(180, 20, 20, 0.9); 
+            background: rgba(140, 20, 20, 0.9); 
             color: white; 
-            padding: 3px 6px; 
+            padding: 3px 7px; 
             font-size: 7px; 
             border-radius: 4px; 
-            font-weight: bold; 
+            font-weight: 600; 
             z-index: 2; 
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
         .loading { 
             text-align: center; 
             grid-column: span 2; 
-            font-family: 'Cinzel', serif;
-            font-size: 11px; 
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 13px; 
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            padding: 35px; 
-            letter-spacing: 2px; 
-            font-weight: 700;
+            padding: 40px; 
+            letter-spacing: 3px; 
+            font-weight: 600;
         }
 
         footer {
-            margin-top: 50px;
+            margin-top: 60px;
             text-align: center;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-            padding-top: 25px;
+            border-top: 1px solid rgba(212, 175, 55, 0.15);
+            padding-top: 30px;
         }
 
         .footer-text {
-            font-family: 'Cinzel', serif;
-            font-size: 10px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 12px;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             text-transform: uppercase;
-            font-weight: 700;
-            margin-bottom: 4px;
+            font-weight: 600;
+            margin-bottom: 6px;
         }
 
         .footer-sub {
-            font-size: 8px;
+            font-size: 7.5px;
             color: #666;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
         }
     </style>
@@ -326,29 +348,29 @@
                 <div class="slide active">
                     <img class="slide-img" src="https://i.postimg.cc/Gm6NLs43/1784547021297.png" alt="Royal Kasturi">
                     <div class="slide-overlay">
-                        <div class="slide-title">Royal Kasturi</div>
+                        <div class="slide-title">Royal Kasturi Essence</div>
                     </div>
                 </div>
                 <div class="slide">
                     <img class="slide-img" src="https://i.postimg.cc/rmnw3h5j/1785151122893.png" alt="Chocolate Fragrance">
                     <div class="slide-overlay">
-                        <div class="slide-title">Chocolate Essence</div>
+                        <div class="slide-title">Artisan Chocolate</div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="section-header">
-            <h2>SUMMONING PRIVATE COLLECTION</h2>
+            <h2>The Private Vault</h2>
         </div>
 
         <div class="container" id="perfume-list">
-            <div class="loading">LOADING PRIVATE VAULT...</div>
+            <div class="loading">ENTERING PRIVATE VAULT...</div>
         </div>
 
         <footer>
             <div class="footer-text">UB Perfumes Gujarat</div>
-            <div class="footer-sub">Handcrafted Bespoke Essences</div>
+            <div class="footer-sub">Handcrafted Bespoke Masterpieces</div>
         </footer>
     </div>
 
@@ -356,14 +378,14 @@
         const SHEET_ID = '13rNvj9LgIuMGplhhNrScH8I8cwguZ5inDTzGphm1EqY'; 
         const WHATSAPP_NUMBER = '919898647697'; 
 
-        // Banner Slider Animation
+        // Cinematic Slider Animation
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
         setInterval(() => {
             slides[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
-        }, 4000);
+        }, 4500);
 
         // Lightning-Fast Google Sheet Data Render
         window.renderPerfumes = function(data) {
@@ -371,7 +393,7 @@
             container.innerHTML = '';
 
             if (!data || !data.table || !data.table.rows || data.table.rows.length === 0) {
-                container.innerHTML = '<div class="loading">COLLECTION CURRENTLY UNAVAILABLE</div>';
+                container.innerHTML = '<div class="loading">COLLECTION TEMPORARILY SEALED</div>';
                 return;
             }
 
@@ -387,14 +409,13 @@
                 const isOutOfStock = stockStatus.includes('out');
                 if (!name) return;
 
-                // WhatsApp link without "Pranam"
                 let actionButton = `<a href="https://wa.me/${WHATSAPP_NUMBER}?text=I wish to order: ${encodeURIComponent(name)}" target="_blank" class="btn">ORDER VIA WHATSAPP</a>`;
                 let badge = '';
                 let cardClass = 'perfume-card';
 
                 if (isOutOfStock) {
-                    actionButton = `<div class="btn-out">SOLD OUT</div>`;
-                    badge = `<div class="stock-tag">RESERVED</div>`;
+                    actionButton = `<div class="btn-out">RESERVED</div>`;
+                    badge = `<div class="stock-tag">SOLD OUT</div>`;
                     cardClass = 'perfume-card out-of-stock';
                 }
 
