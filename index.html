@@ -7,134 +7,80 @@
     <!-- गूगल साइट वेरिफिकेशन टैग -->
     <meta name="google-site-verification" content="K3TaRCvOiyp29o8nM_OL7_dqZcPhPGoSS_iiDNVADkw" />
 
-    <!-- गूगल खोज (SEO) सेटिंग्स -->
-    <title>UB PERFUMES — 10 Lakh X Haute Parfumerie Royale</title>
-    <meta name="description" content="The pinnacle of bespoke royal fragrances. UB Perfumes Private Collection. Handcrafted artisanal masterpieces.">
-    <meta name="robots" content="index, follow">
+    <!-- SEO -->
+    <title>UB PERFUMES — Haute Parfumerie Royale</title>
+    <meta name="description" content="UB Perfumes Private Collection. Handcrafted artisanal royal fragrances.">
 
-    <!-- Millionaire Luxury Typography -->
+    <!-- Clean Luxury Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,600&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --pure-gold: #f9f1d0;
-            --liquid-gold-1: #bf953f;
-            --liquid-gold-2: #fcf6ba;
-            --liquid-gold-3: #b38728;
-            --liquid-gold-4: #aa771c;
-            --royal-gradient: linear-gradient(135deg, var(--liquid-gold-1) 0%, var(--liquid-gold-2) 25%, var(--liquid-gold-3) 50%, var(--liquid-gold-4) 100%);
-            --bg-void: #010101;
-            --card-royal: rgba(10, 10, 12, 0.9);
-            --border-royal-gold: rgba(212, 175, 55, 0.5);
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --bg-color: #050505;
+            --card-bg: rgba(14, 14, 16, 0.9);
+            --border-gold: rgba(212, 175, 55, 0.25);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         
         body { 
             font-family: 'Montserrat', sans-serif; 
-            background-color: var(--bg-void);
-            background-image: 
-                radial-gradient(circle at 50% -5%, rgba(212, 175, 55, 0.28) 0%, transparent 50%),
-                radial-gradient(circle at 50% 105%, rgba(160, 110, 20, 0.15) 0%, transparent 45%);
+            background-color: var(--bg-color);
             color: #f5f5f5; 
-            padding: 0;
-            margin: 0;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* 24K Gold Dust Canvas */
-        #million-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.85;
-        }
-
         header { 
             text-align: center; 
-            padding: 45px 20px 20px 20px; 
-            position: relative;
-            z-index: 2;
+            padding: 40px 20px 20px 20px; 
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            background: linear-gradient(to bottom, #0a0a0c, #050505);
         }
 
         .brand-title { 
-            font-family: 'Cinzel Decorative', serif; 
-            font-size: 34px; 
-            letter-spacing: 9px; 
-            font-weight: 900; 
-            background: var(--royal-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-family: 'Cinzel', serif; 
+            font-size: 28px; 
+            letter-spacing: 6px; 
+            font-weight: 700; 
+            color: var(--gold-light);
             text-transform: uppercase;
-            filter: drop-shadow(0 5px 20px rgba(212, 175, 55, 0.6));
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .brand-subtitle {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 14px;
-            letter-spacing: 7px;
-            color: #e2c98a;
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: #888;
             text-transform: uppercase;
-            font-style: italic;
-            font-weight: 700;
-        }
-
-        .royal-crest {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 18px;
-            margin: 18px auto 0 auto;
-            max-width: 260px;
-        }
-
-        .crest-line {
-            height: 1px;
-            flex-grow: 1;
-            background: linear-gradient(90deg, transparent, var(--liquid-gold-1), transparent);
-        }
-
-        .crest-gem {
-            width: 7px;
-            height: 7px;
-            background: var(--liquid-gold-2);
-            transform: rotate(45deg);
-            box-shadow: 0 0 12px var(--pure-gold);
         }
 
         .wrapper {
-            max-width: 480px;
+            max-width: 460px;
             margin: 0 auto;
-            padding: 0 16px 60px 16px;
-            position: relative;
-            z-index: 2;
+            padding: 20px 16px 50px 16px;
         }
 
-        /* Millionaire Hero Slider */
+        /* Clean Luxury Slider */
         .slider-stage {
             width: 100%;
-            margin: 15px 0 35px 0;
-            position: relative;
-            border-radius: 28px;
-            padding: 2px;
-            background: var(--royal-gradient);
-            box-shadow: 0 35px 70px rgba(0,0,0,0.98), 0 0 45px rgba(212, 175, 55, 0.45);
+            margin-bottom: 30px;
+            border-radius: 16px;
             overflow: hidden;
+            border: 1px solid var(--border-gold);
+            background: #000;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
         }
 
         .slider-inner {
             width: 100%;
-            height: 290px;
-            background: #000;
-            border-radius: 26px;
+            height: 260px;
             position: relative;
-            overflow: hidden;
         }
 
         .slide {
@@ -142,11 +88,10 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             opacity: 0;
-            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
-            transform: scale(1.08);
+            transition: opacity 1s ease-in-out;
         }
 
-        .slide.active { opacity: 1; transform: scale(1); z-index: 1; }
+        .slide.active { opacity: 1; z-index: 1; }
 
         .slide-img {
             width: 100%;
@@ -157,101 +102,53 @@
         .slide-overlay {
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            padding: 35px 20px 20px 20px;
-            background: linear-gradient(to top, rgba(1,1,1,0.99) 0%, rgba(1,1,1,0.5) 60%, transparent 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            z-index: 2;
-        }
-
-        .slide-badge {
-            align-self: flex-start;
-            background: rgba(212, 175, 55, 0.2);
-            border: 1px solid var(--liquid-gold-1);
-            color: var(--pure-gold);
-            font-size: 8px;
-            letter-spacing: 3px;
-            padding: 4px 14px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            margin-bottom: 6px;
-            backdrop-filter: blur(8px);
-            font-weight: 700;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
         }
 
         .slide-title {
             font-family: 'Cinzel', serif;
-            font-size: 21px;
-            font-weight: 700;
+            font-size: 16px;
             color: #fff;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.9);
-        }
-
-        .dots-container {
-            position: absolute;
-            bottom: 18px;
-            right: 20px;
-            display: flex;
-            gap: 6px;
-            z-index: 4;
-        }
-
-        .dot {
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-            transition: all 0.4s ease;
-        }
-
-        .dot.active {
-            width: 28px;
-            border-radius: 12px;
-            background: var(--royal-gradient);
-            box-shadow: 0 0 12px var(--liquid-gold-1);
+            letter-spacing: 1px;
         }
 
         /* Section Heading */
         .section-header {
             text-align: center;
-            margin: 40px 0 22px 0;
+            margin: 25px 0 20px 0;
         }
 
         .section-header h2 {
             font-family: 'Cinzel', serif;
-            font-size: 15px;
-            letter-spacing: 6px;
-            color: var(--pure-gold);
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: var(--gold);
             text-transform: uppercase;
-            font-weight: 700;
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            font-weight: 600;
         }
 
-        /* Elite Product Grid */
+        /* Product Grid */
         .container { 
             display: grid; 
             grid-template-columns: repeat(2, 1fr); 
-            gap: 16px; 
+            gap: 14px; 
         }
         
         .perfume-card { 
-            background: var(--card-royal); 
-            border: 1px solid var(--border-royal-gold); 
-            border-radius: 22px; 
-            padding: 14px; 
+            background: var(--card-bg); 
+            border: 1px solid var(--border-gold); 
+            border-radius: 14px; 
+            padding: 12px; 
             display: flex; 
             flex-direction: column; 
             position: relative;
-            box-shadow: 0 20px 45px rgba(0,0,0,0.99), inset 0 0 25px rgba(255,255,255,0.02);
-            backdrop-filter: blur(20px);
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            transition: border-color 0.3s ease;
         }
 
         .perfume-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: rgba(255, 241, 208, 0.9);
-            box-shadow: 0 30px 60px rgba(0,0,0,1), 0 0 35px rgba(212, 175, 55, 0.6);
+            border-color: var(--gold);
         }
 
         .image-container { 
@@ -259,141 +156,122 @@
             padding-top: 100%; 
             position: relative; 
             overflow: hidden; 
-            border-radius: 16px; 
-            margin-bottom: 12px; 
+            border-radius: 10px; 
+            margin-bottom: 10px; 
             background: #000;
-            border: 1px solid rgba(255,255,255,0.08);
         }
 
         .product-img { 
             position: absolute; 
-            top:0; left:0; 
+            top: 0; left: 0; 
             width: 100%; height: 100%; 
             object-fit: cover; 
-            transition: transform 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: transform 0.5s ease;
         }
 
         .perfume-card:hover .product-img {
-            transform: scale(1.15);
+            transform: scale(1.05);
         }
 
         .perfume-title {
             font-family: 'Cinzel', serif; 
-            font-size: 13px; 
+            font-size: 12px; 
             margin-bottom: 6px; 
-            font-weight: 700; 
+            font-weight: 600; 
             color: #fff; 
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .perfume-price-row {
             display: flex;
             align-items: baseline;
             justify-content: space-between;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .perfume-price {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 20px; 
-            color: var(--pure-gold); 
+            font-family: 'Cinzel', serif;
+            font-size: 15px; 
+            color: var(--gold-light); 
             font-weight: 700;
-            background: var(--royal-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 0.5px;
         }
 
         .perfume-volume {
             font-size: 8px;
-            color: #999;
-            letter-spacing: 2px;
+            color: #777;
+            letter-spacing: 1px;
             text-transform: uppercase;
         }
 
-        /* 24K Gold Liquid Button */
         .btn { 
             display: block; 
-            background: var(--royal-gradient); 
-            color: #020202; 
+            background: var(--gold); 
+            color: #050505; 
             text-align: center; 
-            padding: 13px 10px; 
-            border-radius: 35px; 
+            padding: 10px; 
+            border-radius: 20px; 
             text-decoration: none; 
-            font-size: 10px; 
-            font-weight: 900; 
+            font-size: 9px; 
+            font-weight: 700; 
             margin-top: auto; 
-            letter-spacing: 2.5px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: background 0.2s ease;
         }
 
-        .btn:active { 
-            transform: scale(0.96); 
-            box-shadow: 0 3px 12px rgba(212, 175, 55, 0.4);
-        }
+        .btn:active { background: #b38728; }
         
-        .perfume-card.out-of-stock .product-img { filter: grayscale(100%); opacity: 0.3; }
+        .perfume-card.out-of-stock .product-img { filter: grayscale(100%); opacity: 0.4; }
         .btn-out { 
-            background: #0d0d0f; 
+            background: #151517; 
             border: 1px solid #222;
-            color: #444; 
+            color: #555; 
             cursor: not-allowed; 
             text-align: center; 
-            padding: 13px 10px; 
-            border-radius: 35px; 
-            font-size: 10px; 
+            padding: 10px; 
+            border-radius: 20px; 
+            font-size: 9px; 
             margin-top: auto; 
-            font-weight: 700; 
-            letter-spacing: 2px;
+            font-weight: 600; 
         }
 
         .stock-tag { 
             position: absolute; 
-            top: 18px; left: 18px; 
-            background: rgba(190, 20, 20, 0.92); 
+            top: 14px; left: 14px; 
+            background: rgba(180, 30, 30, 0.9); 
             color: white; 
-            padding: 4px 10px; 
-            font-size: 8px; 
-            border-radius: 20px; 
-            font-weight: 700; 
+            padding: 3px 7px; 
+            font-size: 7px; 
+            border-radius: 4px; 
+            font-weight: bold; 
             z-index: 2; 
-            letter-spacing: 1.5px;
-            backdrop-filter: blur(6px);
+            letter-spacing: 1px;
         }
 
         .loading { 
             text-align: center; 
             grid-column: span 2; 
             font-family: 'Cinzel', serif;
-            font-size: 13px; 
-            color: var(--pure-gold); 
-            padding: 40px 20px; 
-            letter-spacing: 3px; 
+            font-size: 11px; 
+            color: var(--gold); 
+            padding: 30px; 
+            letter-spacing: 2px; 
         }
 
         footer {
-            margin-top: 60px;
+            margin-top: 40px;
             text-align: center;
-            border-top: 1px solid var(--border-royal-gold);
-            padding-top: 30px;
+            border-top: 1px solid rgba(212, 175, 55, 0.15);
+            padding-top: 20px;
         }
 
         .footer-text {
             font-family: 'Cinzel', serif;
-            font-size: 11px;
-            color: var(--pure-gold);
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            margin-bottom: 6px;
-        }
-
-        .footer-sub {
-            font-size: 9px;
-            color: #777;
+            font-size: 10px;
+            color: var(--gold);
             letter-spacing: 3px;
             text-transform: uppercase;
         }
@@ -401,41 +279,25 @@
 </head>
 <body>
 
-    <!-- 24K Gold Dust Canvas -->
-    <canvas id="million-canvas"></canvas>
-
     <header>
-        <div class="brand-title">UB PERFUMES</div>
+        <div class="brand-title">UB Perfumes</div>
         <div class="brand-subtitle">Haute Parfumerie Royale</div>
-        <div class="royal-crest">
-            <div class="crest-line"></div>
-            <div class="crest-gem"></div>
-            <div class="crest-line"></div>
-        </div>
     </header>
 
     <div class="wrapper">
-        <!-- Millionaire Slider -->
         <div class="slider-stage">
             <div class="slider-inner">
                 <div class="slide active">
                     <img class="slide-img" src="https://i.postimg.cc/Gm6NLs43/1784547021297.png" alt="Royal Kasturi">
                     <div class="slide-overlay">
-                        <span class="slide-badge">Royal Reserve</span>
-                        <h2 class="slide-title">Royal Kasturi</h2>
+                        <div class="slide-title">Royal Kasturi</div>
                     </div>
                 </div>
                 <div class="slide">
                     <img class="slide-img" src="https://i.postimg.cc/rmnw3h5j/1785151122893.png" alt="Chocolate Fragrance">
                     <div class="slide-overlay">
-                        <span class="slide-badge">Exclusive Artisanal</span>
-                        <h2 class="slide-title">Chocolate Essence</h2>
+                        <div class="slide-title">Chocolate Essence</div>
                     </div>
-                </div>
-
-                <div class="dots-container">
-                    <div class="dot active"></div>
-                    <div class="dot"></div>
                 </div>
             </div>
         </div>
@@ -445,12 +307,11 @@
         </div>
 
         <div class="container" id="perfume-list">
-            <div class="loading">Loading Royal Vault...</div>
+            <div class="loading">Loading...</div>
         </div>
 
         <footer>
             <div class="footer-text">UB Perfumes Gujarat</div>
-            <div class="footer-sub">Handcrafted Bespoke Essences</div>
         </footer>
     </div>
 
@@ -458,70 +319,22 @@
         const SHEET_ID = '13rNvj9LgIuMGplhhNrScH8I8cwguZ5inDTzGphm1EqY'; 
         const WHATSAPP_NUMBER = '919898647697'; 
 
-        // 24K Gold Dust Background Effect
-        const canvas = document.getElementById('million-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        class GoldDust {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 1.8 + 0.4;
-                this.speedY = -(Math.random() * 0.2 + 0.04);
-                this.opacity = Math.random() * 0.7 + 0.2;
-            }
-            update() {
-                this.y += this.speedY;
-                if (this.y < 0) {
-                    this.y = canvas.height;
-                    this.x = Math.random() * canvas.width;
-                }
-            }
-            draw() {
-                ctx.fillStyle = `rgba(249, 241, 208, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        for (let i = 0; i < 40; i++) particles.push(new GoldDust());
-
-        function animateGoldDust() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animateGoldDust);
-        }
-        animateGoldDust();
-
-        // Slider Animation
+        // Simple Banner Slider
         const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
         let currentSlide = 0;
-
         setInterval(() => {
             slides[currentSlide].classList.remove('active');
-            dots[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
-            dots[currentSlide].classList.add('active');
-        }, 4000);
+        }, 3500);
 
-        // Instant Lightning-Fast Google Sheet Data Render
+        // Fast Google Sheet Data Render
         window.renderPerfumes = function(data) {
             const container = document.getElementById('perfume-list');
             container.innerHTML = '';
 
             if (!data || !data.table || !data.table.rows || data.table.rows.length === 0) {
-                container.innerHTML = '<div class="loading">COLLECTION CURRENTLY UNAVAILABLE</div>';
+                container.innerHTML = '<div class="loading">NO PRODUCTS FOUND</div>';
                 return;
             }
 
@@ -537,7 +350,7 @@
                 const isOutOfStock = stockStatus.includes('out');
                 if (!name) return;
 
-                let actionButton = `<a href="https://wa.me/${WHATSAPP_NUMBER}?text=Pranam UB Perfumes, I wish to reserve: ${encodeURIComponent(name)}" target="_blank" class="btn">RESERVE VIA WA</a>`;
+                let actionButton = `<a href="https://wa.me/${WHATSAPP_NUMBER}?text=Pranam UB Perfumes, I wish to reserve: ${encodeURIComponent(name)}" target="_blank" class="btn">RESERVE</a>`;
                 let badge = '';
                 let cardClass = 'perfume-card';
 
@@ -565,7 +378,7 @@
         const script = document.createElement('script');
         script.src = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=responseHandler:renderPerfumes`;
         script.onerror = function() {
-            document.getElementById('perfume-list').innerHTML = '<div class="loading">UNABLE TO REACH PRIVATE VAULT</div>';
+            document.getElementById('perfume-list').innerHTML = '<div class="loading">CONNECTION FAILED</div>';
         };
         document.body.appendChild(script);
     </script>
