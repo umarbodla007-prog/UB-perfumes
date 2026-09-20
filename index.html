@@ -15,9 +15,14 @@
 
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: sans-serif; background-color: #ffffff; color: #121212; padding: 20px 15px 30px 15px; }
-        header { text-align: center; padding-bottom: 20px; margin-bottom: 25px; border-bottom: 1px solid #f2f2f2; }
+        body { font-family: sans-serif; background-color: #ffffff; color: #121212; padding: 15px; }
+        header { text-align: center; padding-bottom: 15px; margin-bottom: 15px; border-bottom: 1px solid #f2f2f2; }
         h1 { font-size: 24px; letter-spacing: 2px; }
+
+        /* Banner Slider Style */
+        .slider-container { width: 100%; max-width: 500px; margin: 0 auto 20px auto; position: relative; overflow: hidden; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .slides { display: flex; width: 200%; transition: transform 0.5s ease-in-out; }
+        .slide-img { width: 50%; height: 220px; object-fit: cover; }
 
         .container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
         .card { border: 1px solid #eee; border-radius: 15px; padding: 10px; display: flex; flex-direction: column; position: relative; }
@@ -35,15 +40,31 @@
 
     <header><h1>UB PERFUMES</h1></header>
 
+    <!-- Slide Show (Hero Banner) -->
+    <div class="slider-container">
+        <div class="slides" id="slider">
+            <img class="slide-img" src="https://i.postimg.cc/Gm6NLs43/1784547021297.png" alt="Royal Kasturi">
+            <img class="slide-img" src="https://i.postimg.cc/rmnw3h5j/1785151122893.png" alt="Chocolate">
+        </div>
+    </div>
+
     <div class="container" id="perfume-list">
         <div class="loading">उत्पाद लोड हो रहे हैं...</div>
     </div>
 
     <script>
-        const SHEET_ID = '13rNvj9LgIuMGplhhNrScH8I8cwguZ5inDTzGphm1EqY'; 
-        const WHATSAPP_NUMBER = '919898647697'; // यहाँ अपना असली WhatsApp नंबर डालें
+        // Automatic Banner Slider Logic
+        let currentSlide = 0;
+        const slider = document.getElementById('slider');
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % 2;
+            slider.style.transform = `translateX(-${currentSlide * 50}%)`;
+        }, 3000);
 
-        // Google Sheet JSONP callback function
+        // Google Sheet Setup
+        const SHEET_ID = '13rNvj9LgIuMGplhhNrScH8I8cwguZ5inDTzGphm1EqY'; 
+        const WHATSAPP_NUMBER = '919898647697'; // अपना असली WhatsApp नंबर डालें
+
         window.renderPerfumes = function(data) {
             const container = document.getElementById('perfume-list');
             container.innerHTML = '';
@@ -90,11 +111,10 @@
             });
         };
 
-        // Script Tag Injection to bypass CORS entirely
         const script = document.createElement('script');
         script.src = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=responseHandler:renderPerfumes`;
         script.onerror = function() {
-            document.getElementById('perfume-list').innerHTML = '<div class="loading">उत्पाद लोड करने में समस्या आई। कृपया चेक करें कि Sheet "Anyone with the link" पर सेट है या नहीं।</div>';
+            document.getElementById('perfume-list').innerHTML = '<div class="loading">उत्पाद लोड करने में समस्या आई।</div>';
         };
         document.body.appendChild(script);
     </script>
