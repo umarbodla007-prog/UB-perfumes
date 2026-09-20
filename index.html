@@ -9,8 +9,8 @@
 
     <!-- गूगल खोज (SEO) सेटिंग्स -->
     <title>UB Perfumes - Buy Premium & Luxury Fragrances Online</title>
-    <meta name="description" content="Buy premium, long-lasting luxury perfumes online at UB Perfumes. Explore our exclusive collection including Royal Kasturi, Chocolates, Mango Man. Order easily via WhatsApp.">
-    <meta name="keywords" content="UB Perfumes, buy perfume online, luxury fragrances, Royal Kasturi, Chocolates, Mango Man">
+    <meta name="description" content="Buy premium, long-lasting luxury perfumes online at UB Perfumes. Explore our exclusive collection including Kasturi, Chocolates, Mango Man. Order easily via WhatsApp.">
+    <meta name="keywords" content="UB Perfumes, buy perfume online, luxury fragrances, Kasturi, Chocolates, Mango Man">
     <meta name="robots" content="index, follow">
 
     <style>
@@ -40,69 +40,63 @@
     </div>
 
     <script>
-        // आपकी असली गूगल शीट ID
         const SHEET_ID = '13rNvj9LgIuMGplhhNrScH8I8cwguZ5inDTzGphm1EqY'; 
-        const WHATSAPP_NUMBER = '919898647697'; // अपना WhatsApp नंबर डालें
+        const WHATSAPP_NUMBER = '919898647697'; // यहाँ अपना असली WhatsApp नंबर डालें
 
-        // Direct CSV Fetch
-        const csvUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
+        // Google Sheet JSONP callback function
+        window.renderPerfumes = function(data) {
+            const container = document.getElementById('perfume-list');
+            container.innerHTML = '';
 
-        fetch(csvUrl)
-            .then(res => {
-                if(!res.ok) throw new Error('Sheet Access Error');
-                return res.text();
-            })
-            .then(csv => {
-                const lines = csv.split(/\r?\n/);
-                const container = document.getElementById('perfume-list');
-                container.innerHTML = '';
+            if (!data || !data.table || !data.table.rows || data.table.rows.length === 0) {
+                container.innerHTML = '<div class="loading">शीट में कोई उत्पाद उपलब्ध नहीं है।</div>';
+                return;
+            }
+
+            const rows = data.table.rows;
+
+            rows.forEach((row) => {
+                const cols = row.c;
+                if (!cols || !cols[0] || !cols[0].v) return;
+
+                const name = cols[0] ? String(cols[0].v).trim() : '';
+                const price = cols[1] && cols[1].v !== null ? String(cols[1].v).trim() : '';
+                const img = cols[3] && cols[3].v ? String(cols[3].v).trim() : 'https://via.placeholder.com/200';
+                const stockStatus = cols[4] && cols[4].v ? String(cols[4].v).trim().toLowerCase() : '';
                 
-                if (lines.length <= 1) {
-                    container.innerHTML = '<div class="loading">शीट में कोई उत्पाद उपलब्ध नहीं है।</div>';
-                    return;
+                const isOutOfStock = stockStatus.includes('out');
+
+                if (!name) return;
+
+                let actionButton = `<a href="https://wa.me/${WHATSAPP_NUMBER}?text=मुझे ${encodeURIComponent(name)} चाहिए" target="_blank" class="btn">WhatsApp</a>`;
+                let badge = '';
+                let cardClass = 'card';
+
+                if (isOutOfStock) {
+                    actionButton = `<div class="btn-out">Out of Stock</div>`;
+                    badge = `<div class="stock-tag">OUT OF STOCK</div>`;
+                    cardClass = 'card out-of-stock';
                 }
 
-                for (let i = 1; i < lines.length; i++) {
-                    const row = lines[i];
-                    if (!row || !row.trim()) continue;
-
-                    const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                    if (cols.length < 2) continue;
-
-                    const name = cols[0] ? cols[0].replace(/^"|"$/g, '').trim() : '';
-                    const price = cols[1] ? cols[1].replace(/^"|"$/g, '').trim() : '';
-                    const img = cols[3] && cols[3].trim() !== '' ? cols[3].replace(/^"|"$/g, '').trim() : 'https://via.placeholder.com/200';
-                    const stockStatus = cols[4] ? cols[4].replace(/^"|"$/g, '').trim().toLowerCase() : '';
-                    
-                    const isOutOfStock = stockStatus.includes('out');
-
-                    if (!name) continue;
-
-                    let actionButton = `<a href="https://wa.me/${WHATSAPP_NUMBER}?text=मुझे ${encodeURIComponent(name)} चाहिए" target="_blank" class="btn">WhatsApp</a>`;
-                    let badge = '';
-                    let cardClass = 'card';
-
-                    if (isOutOfStock) {
-                        actionButton = `<div class="btn-out">Out of Stock</div>`;
-                        badge = `<div class="stock-tag">OUT OF STOCK</div>`;
-                        cardClass = 'card out-of-stock';
-                    }
-
-                    container.innerHTML += `
-                        <div class="${cardClass}">
-                            ${badge}
-                            <div class="image-container"><img class="product-img" src="${img}" alt="${name}"></div>
-                            <h3 style="font-size:14px; margin-bottom:5px;">${name}</h3>
-                            <p style="font-size:13px; color:#555; margin-bottom:8px;">Rs. ${price}</p>
-                            ${actionButton}
-                        </div>
-                    `;
-                }
-            })
-            .catch(err => {
-                console.error("Error loading products:", err);
-                document.getElementById('perfume-list').innerHTML = '<div class="loading">उत्पाद लोड करने में समस्या आई।</div>';
+                container.innerHTML += `
+                    <div class="${cardClass}">
+                        ${badge}
+                        <div class="image-container"><img class="product-img" src="${img}" alt="${name}"></div>
+                        <h3 style="font-size:14px; margin-bottom:5px;">${name}</h3>
+                        <p style="font-size:13px; color:#555; margin-bottom:8px;">Rs. ${price}</p>
+                        ${actionButton}
+                    </div>
+                `;
             });
+        };
+
+        // Script Tag Injection to bypass CORS entirely
+        const script = document.createElement('script');
+        script.src = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=responseHandler:renderPerfumes`;
+        script.onerror = function() {
+            document.getElementById('perfume-list').innerHTML = '<div class="loading">उत्पाद लोड करने में समस्या आई। कृपया चेक करें कि Sheet "Anyone with the link" पर सेट है या नहीं।</div>';
+        };
+        document.body.appendChild(script);
     </script>
 </body>
 </html>
