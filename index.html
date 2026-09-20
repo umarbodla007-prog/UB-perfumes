@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- 👇 यहाँ आपका Google Verification Tag लगेगा 👇 -->
+    <!-- 👇 गूगल से कॉपी किया हुआ पूरा टैग यहाँ पेस्ट करें 👇 -->
     <meta name="google-site-verification" content="<meta name="google-site-verification" content="K3TaRCv0iyq29o8nM_OL7_dqZcPhPGoS5_iiDNVAOkw" />" />
 
     <!-- गूगल खोज (SEO) सेटिंग्स -->
@@ -44,7 +44,7 @@
 
     <header><h1>UB PERFUMES</h1></header>
 
-    <!-- बैनर स्लाइडर (आपके फोटो लिंक्स के साथ) -->
+    <!-- बैनर स्लाइडर -->
     <div class="hero-slider">
         <div class="slide active">
             <img src="https://i.postimg.cc/9X0RLs43/170454702r297.png" alt="Slide 1">
@@ -61,7 +61,7 @@
     <script>
         // 📌 सेटिंग्स
         const SHEET_ID = '1-jZ03O0D7cOsk3h7-aKk0hHl_hCg0Ld2-k01-tQ4xVk'; 
-        const WHATSAPP_NUMBER = '919898647697'; // अपना WhatsApp नंबर यहाँ डालें
+        const WHATSAPP_NUMBER = '919898647697'; // अपना WhatsApp नंबर डालें
 
         // स्लाइडर कोड
         let currentSlide = 0;
@@ -94,7 +94,6 @@
                     const price = cols[1].replace(/['"]+/g, '').trim();
                     const img = cols[3] ? cols[3].replace(/['"]+/g, '').trim() : 'https://via.placeholder.com/200';
                     
-                    // कॉलम E (Stock Status) चेक करना
                     const stockStatus = cols[4] ? cols[4].replace(/['"]+/g, '').trim().toLowerCase() : '';
                     const isOutOfStock = stockStatus.includes('out');
 
