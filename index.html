@@ -13,7 +13,7 @@
     <meta name="keywords" content="UB Perfumes, buy perfume online, luxury fragrances, Royal kastur, choco rush">
     <meta name="robots" content="index, follow">
 
-    <!-- PapaParse Library for accurate CSV parsing -->
+    <!-- PapaParse Library for error-free CSV parsing -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 
     <style>
@@ -22,7 +22,7 @@
         header { text-align: center; padding: 20px 0 15px 0; border-bottom: 1px solid #f2f2f2; }
         h1 { font-size: 24px; letter-spacing: 2px; }
         
-        /* छोटा और परफेक्ट स्लाइडर */
+        /* बैनर स्लाइडर */
         .hero-slider { width: 100%; height: 180px; position: relative; overflow: hidden; margin-bottom: 25px; }
         .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; }
         .slide.active { opacity: 1; }
@@ -47,13 +47,13 @@
 
     <header><h1>UB PERFUMES</h1></header>
 
-    <!-- बैनर स्लाइडर -->
+    <!-- वर्किंग बैनर स्लाइडर -->
     <div class="hero-slider">
         <div class="slide active">
-            <img src="https://i.postimg.cc/9X0RLs43/170454702r297.png" alt="Slide 1">
+            <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?q=80&w=800" alt="UB Perfumes Banner 1">
         </div>
         <div class="slide">
-            <img src="https://i.postimg.cc/mmw3h5j/1703515122891.png" alt="Slide 2">
+            <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?q=80&w=800" alt="UB Perfumes Banner 2">
         </div>
     </div>
 
@@ -64,9 +64,9 @@
     <script>
         // 📌 सेटिंग्स
         const SHEET_ID = '1-jZ03O0D7cOsk3h7-aKk0hHl_hCg0Ld2-k01-tQ4xVk'; 
-        const WHATSAPP_NUMBER = '919898647697'; // यहाँ अपना असली WhatsApp नंबर डालें
+        const WHATSAPP_NUMBER = '919898647697'; // यहाँ अपना WhatsApp नंबर डालें
 
-        // स्लाइडर कोड
+        // स्लाइडर एनिमेशन
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         if(slides.length > 0) {
@@ -77,7 +77,7 @@
             }, 3000);
         }
 
-        // CSV Fetch using PapaParse
+        // CSV Parser
         const csvUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
 
         Papa.parse(csvUrl, {
@@ -98,8 +98,7 @@
                     const stockStatus = cols[4] ? cols[4].trim().toLowerCase() : '';
                     const isOutOfStock = stockStatus.includes('out');
 
-                    // अगर नाम खाली है या कोई गलत टेक्स्ट है तो स्किप करें
-                    if (!name || name.includes('function') || name.includes('Object')) continue;
+                    if (!name || name.toLowerCase().includes('function') || name.toLowerCase().includes('object')) continue;
 
                     let actionButton = `<a href="https://wa.me/${WHATSAPP_NUMBER}?text=मुझे ${encodeURIComponent(name)} चाहिए" target="_blank" class="btn">WhatsApp</a>`;
                     let badge = '';
@@ -126,4 +125,3 @@
     </script>
 </body>
 </html>
-
