@@ -13,11 +13,49 @@
     <meta name="keywords" content="UB Perfumes, buy perfume online, luxury fragrances, Royal Kasturi, Chocolates, Mango Man">
     <meta name="robots" content="index, follow">
 
+    <!-- Google Font for Luxury Look -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #0d0d0d; color: #ffffff; padding: 15px; }
-        header { text-align: center; padding: 15px 0 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px; }
-        h1 { font-size: 26px; letter-spacing: 4px; font-weight: 300; color: #f3e5ab; text-transform: uppercase; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background: radial-gradient(circle at top, #1a1a1a 0%, #080808 100%); 
+            color: #ffffff; 
+            padding: 15px; 
+            min-height: 100vh;
+        }
+
+        /* Ultra Premium Header */
+        header { 
+            text-align: center; 
+            padding: 20px 0 15px 0; 
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .brand-title { 
+            font-family: 'Cinzel', serif; 
+            font-size: 28px; 
+            letter-spacing: 5px; 
+            font-weight: 700; 
+            background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+        .brand-subtitle {
+            font-size: 10px;
+            letter-spacing: 4px;
+            color: #888;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+        .gold-divider {
+            width: 50px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            margin: 10px auto 0 auto;
+        }
 
         /* Ultra Luxury Banner Slider */
         .slider-wrapper {
@@ -27,10 +65,10 @@
             position: relative;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.8), 0 0 15px rgba(243, 229, 171, 0.2);
-            border: 1px solid rgba(243, 229, 171, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.9), 0 0 20px rgba(212, 175, 55, 0.25);
+            border: 1px solid rgba(212, 175, 55, 0.4);
             background: #000;
-            height: 250px;
+            height: 260px;
         }
 
         .slide {
@@ -60,8 +98,8 @@
         .slide-overlay {
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            padding: 20px 15px 15px 15px;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+            padding: 25px 20px 20px 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -70,21 +108,23 @@
 
         .slide-badge {
             align-self: flex-start;
-            background: rgba(243, 229, 171, 0.2);
-            border: 1px solid #f3e5ab;
-            color: #f3e5ab;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid #d4af37;
+            color: #fcf6ba;
             font-size: 9px;
             letter-spacing: 2px;
-            padding: 4px 10px;
+            padding: 4px 12px;
             border-radius: 20px;
             text-transform: uppercase;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             backdrop-filter: blur(5px);
+            font-weight: 600;
         }
 
         .slide-title {
-            font-size: 18px;
-            font-weight: 400;
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            font-weight: 600;
             color: #fff;
             letter-spacing: 1px;
         }
@@ -95,9 +135,9 @@
             position: absolute;
             top: -50%; left: -50%;
             width: 200%; height: 200%;
-            background: linear-gradient(60deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            background: linear-gradient(60deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
             transform: rotate(30deg);
-            animation: shine 7s infinite;
+            animation: shine 6s infinite;
             pointer-events: none;
             z-index: 3;
         }
@@ -108,11 +148,11 @@
             100% { transform: translate(100%, 100%) rotate(30deg); }
         }
 
-        /* Dots & Progress Bar */
+        /* Dots & Progress Indicator */
         .dots-container {
             position: absolute;
-            bottom: 12px;
-            right: 15px;
+            bottom: 15px;
+            right: 20px;
             display: flex;
             gap: 6px;
             z-index: 4;
@@ -121,34 +161,70 @@
         .dot {
             width: 8px; height: 8px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.4);
+            background: rgba(255,255,255,0.3);
             transition: all 0.4s ease;
         }
 
         .dot.active {
-            width: 22px;
+            width: 24px;
             border-radius: 10px;
-            background: #f3e5ab;
-            box-shadow: 0 0 8px #f3e5ab;
+            background: #d4af37;
+            box-shadow: 0 0 10px #d4af37;
         }
 
-        /* Product Cards Container */
+        /* Product Grid Container */
         .container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-        .card { background: #141414; border: 1px solid rgba(255,255,255,0.08); border-radius: 15px; padding: 12px; display: flex; flex-direction: column; position: relative; }
-        .image-container { width: 100%; padding-top: 100%; position: relative; overflow: hidden; border-radius: 10px; margin-bottom: 10px; }
-        .product-img { position: absolute; top:0; left:0; width: 100%; height: 100%; object-fit: cover; }
         
-        .btn { display: block; background: #f3e5ab; color: #000; text-align: center; padding: 10px; border-radius: 20px; text-decoration: none; font-size: 12px; font-weight: bold; margin-top: auto; letter-spacing: 1px; }
-        .card.out-of-stock .product-img { filter: grayscale(84%); opacity: 0.5; }
-        .btn-out { background: #e53935; color: #fff; cursor: not-allowed; text-align: center; padding: 10px; border-radius: 20px; font-size: 12px; margin-top: auto; font-weight: bold; }
-        .stock-tag { position: absolute; top: 15px; left: 15px; background: #e53935; color: white; padding: 3px 8px; font-size: 10px; border-radius: 5px; font-weight: bold; z-index: 2; }
-        .loading { text-align: center; grid-column: span 2; font-size: 14px; color: #888; padding: 30px; }
+        .card { 
+            background: linear-gradient(145deg, #141414, #0b0b0b); 
+            border: 1px solid rgba(212, 175, 55, 0.15); 
+            border-radius: 18px; 
+            padding: 12px; 
+            display: flex; 
+            flex-direction: column; 
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .card:active {
+            transform: scale(0.98);
+            border-color: rgba(212, 175, 55, 0.5);
+        }
+
+        .image-container { width: 100%; padding-top: 100%; position: relative; overflow: hidden; border-radius: 12px; margin-bottom: 12px; }
+        .product-img { position: absolute; top:0; left:0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        
+        .card:hover .product-img { transform: scale(1.08); }
+
+        .btn { 
+            display: block; 
+            background: linear-gradient(135deg, #bf953f, #d4af37); 
+            color: #000; 
+            text-align: center; 
+            padding: 10px; 
+            border-radius: 20px; 
+            text-decoration: none; 
+            font-size: 11px; 
+            font-weight: 700; 
+            margin-top: auto; 
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+            text-transform: uppercase;
+        }
+        
+        .card.out-of-stock .product-img { filter: grayscale(84%); opacity: 0.4; }
+        .btn-out { background: #333; color: #888; cursor: not-allowed; text-align: center; padding: 10px; border-radius: 20px; font-size: 11px; margin-top: auto; font-weight: bold; }
+        .stock-tag { position: absolute; top: 18px; left: 18px; background: #e53935; color: white; padding: 3px 8px; font-size: 9px; border-radius: 4px; font-weight: bold; z-index: 2; letter-spacing: 1px; }
+        .loading { text-align: center; grid-column: span 2; font-size: 14px; color: #d4af37; padding: 40px; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>UB PERFUMES</h1>
+        <div class="brand-title">UB PERFUMES</div>
+        <div class="brand-subtitle">HAUTE PARFUMERIE • EST. 2026</div>
+        <div class="gold-divider"></div>
     </header>
 
     <!-- Animated Luxury Hero Banner Slider -->
@@ -175,7 +251,7 @@
     </div>
 
     <div class="container" id="perfume-list">
-        <div class="loading">उत्पाद लोड हो रहे हैं...</div>
+        <div class="loading">LOADING LUXURY COLLECTION...</div>
     </div>
 
     <script>
@@ -224,13 +300,13 @@
 
                 if (!name) return;
 
-                let actionButton = `<a href="https://wa.me/${WHATSAPP_NUMBER}?text=मुझे ${encodeURIComponent(name)} चाहिए" target="_blank" class="btn">WHATSAPP ORDER</a>`;
+                let actionButton = `<a href="https://wa.me/${WHATSAPP_NUMBER}?text=नमस्कार UB Perfumes, मुझे ${encodeURIComponent(name)} ऑर्डर करना है।" target="_blank" class="btn">ORDER VIA WHATSAPP</a>`;
                 let badge = '';
                 let cardClass = 'card';
 
                 if (isOutOfStock) {
-                    actionButton = `<div class="btn-out">OUT OF STOCK</div>`;
-                    badge = `<div class="stock-tag">OUT OF STOCK</div>`;
+                    actionButton = `<div class="btn-out">SOLD OUT</div>`;
+                    badge = `<div class="stock-tag">SOLD OUT</div>`;
                     cardClass = 'card out-of-stock';
                 }
 
@@ -238,8 +314,8 @@
                     <div class="${cardClass}">
                         ${badge}
                         <div class="image-container"><img class="product-img" src="${img}" alt="${name}"></div>
-                        <h3 style="font-size:14px; margin-bottom:5px; font-weight:400; letter-spacing:0.5px;">${name}</h3>
-                        <p style="font-size:13px; color:#f3e5ab; margin-bottom:10px; font-weight:bold;">Rs. ${price}</p>
+                        <h3 style="font-family:'Cinzel', serif; font-size:13px; margin-bottom:4px; font-weight:600; color:#fff; letter-spacing:0.5px;">${name}</h3>
+                        <p style="font-size:13px; color:#d4af37; margin-bottom:10px; font-weight:600;">₹ ${price}</p>
                         ${actionButton}
                     </div>
                 `;
