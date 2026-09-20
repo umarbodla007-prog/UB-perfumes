@@ -76,24 +76,27 @@
             padding: 30px 14px 70px 14px;
         }
 
-        /* --- Ultra-Luxury Cinematic Slider --- */
+        /* --- Roja / Clive Christian Style High-End Crystal Slider --- */
         .slider-stage {
             width: 100%;
             margin-bottom: 40px;
             border-radius: 18px;
             padding: 1.5px;
             background: var(--gold-gradient);
-            box-shadow: 0 35px 70px rgba(0,0,0,0.98), 0 0 30px rgba(212, 175, 55, 0.15);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.99), 0 0 35px rgba(212, 175, 55, 0.2);
             position: relative;
         }
 
         .slider-inner {
             width: 100%;
-            height: 310px;
-            background: #040405;
+            height: 320px;
+            background: radial-gradient(circle, #111116 0%, #030304 100%);
             border-radius: 17px;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .slide {
@@ -103,6 +106,10 @@
             opacity: 0;
             visibility: hidden;
             transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.8s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 20px 45px 20px;
         }
 
         .slide.active { 
@@ -111,25 +118,25 @@
             z-index: 1; 
         }
 
+        /* Perfectly Clear, Unblurred Crystal View */
         .slide-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: contrast(1.08) brightness(0.92);
-            transform: scale(1);
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.9));
+            transform: scale(0.95);
             transition: transform 6s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .slide.active .slide-img {
-            transform: scale(1.08); /* Slow cinematic zoom effect */
+            transform: scale(1.02); /* Subtle luxurious zoom without cropping */
         }
 
         .slide-overlay {
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            padding: 35px 22px 20px 22px;
-            background: linear-gradient(to top, rgba(3,3,4,0.95) 15%, rgba(3,3,4,0.6) 70%, transparent 100%);
-            backdrop-filter: blur(3px);
+            padding: 25px 20px 15px 20px;
+            background: linear-gradient(to top, rgba(3,3,4,0.98) 20%, rgba(3,3,4,0.7) 70%, transparent 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -139,26 +146,26 @@
         .slide-tag {
             font-size: 7px;
             letter-spacing: 4px;
-            color: #aaa;
+            color: #b5b5b5;
             text-transform: uppercase;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
             font-weight: 500;
         }
 
         .slide-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 600;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 3px;
+            letter-spacing: 2.5px;
         }
 
-        /* Slider Navigation Dots */
+        /* Slider Indicators */
         .slider-dots {
             position: absolute;
-            bottom: 12px;
+            bottom: 10px;
             right: 15px;
             display: flex;
             gap: 5px;
@@ -394,7 +401,7 @@
     </header>
 
     <div class="wrapper">
-        <!-- Cinematic Luxury Slider Stage -->
+        <!-- Crystal Clear High-End Luxury Slider -->
         <div class="slider-stage">
             <div class="slider-inner" id="slider-container">
                 <div class="slide active">
@@ -412,7 +419,7 @@
                     </div>
                 </div>
                 
-                <!-- Dynamic Slider Indicators -->
+                <!-- Indicators -->
                 <div class="slider-dots">
                     <span class="dot active"></span>
                     <span class="dot"></span>
@@ -438,7 +445,7 @@
         const SHEET_ID = '13rNvj9LgIuMGplhhNrScH8I8cwguZ5inDTzGphm1EqY'; 
         const WHATSAPP_NUMBER = '919898647697'; 
 
-        // Cinematic Ultra-Smooth Slider Engine
+        // Smooth Slider Engine
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
         let currentSlide = 0;
@@ -453,7 +460,7 @@
             dots[currentSlide].classList.add('active');
         }
 
-        setInterval(nextSlide, 5000); // Changes every 5 seconds with smooth cinematic transition
+        setInterval(nextSlide, 5000);
 
         // Lightning-Fast Google Sheet Data Render
         window.renderPerfumes = function(data) {
