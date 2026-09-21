@@ -18,6 +18,7 @@
 
     <style>
         :root {
+            /* Default Luxury White & Gold Palette */
             --gold-gradient: linear-gradient(135deg, #c5a059 0%, #dfbf7f 25%, #967129 50%, #f3e5ab 75%, #856119 100%);
             --gold-solid: #b89742;
             --gold-light: #f9f6ed;
@@ -27,6 +28,31 @@
             --border-gold-hover: rgba(184, 151, 66, 0.7);
             --text-main: #1a1a1a;
             --text-muted: #666666;
+            --header-bg: linear-gradient(to bottom, #ffffff, #fcfbfa);
+            --accent-glow: rgba(197, 160, 89, 0.08);
+        }
+
+        /* Dynamic Festival Theme Classes */
+        body.theme-saudi {
+            --gold-gradient: linear-gradient(135deg, #006C35 0%, #2E8B57 35%, #D4AF37 70%, #004225 100%);
+            --gold-solid: #006C35;
+            --gold-light: #e8f5e9;
+            --card-surface: #f4faf6;
+            --border-gold: rgba(0, 108, 53, 0.3);
+            --border-gold-hover: rgba(0, 108, 53, 0.8);
+            --accent-glow: rgba(0, 108, 53, 0.12);
+            --header-bg: linear-gradient(to bottom, #ffffff, #edf7f0);
+        }
+
+        body.theme-diwali {
+            --gold-gradient: linear-gradient(135deg, #ff8c00 0%, #ff4500 40%, #ffd700 80%, #ff8c00 100%);
+            --gold-solid: #ff8c00;
+            --gold-light: #fff5e6;
+            --card-surface: #fffbf5;
+            --border-gold: rgba(255, 140, 0, 0.3);
+            --border-gold-hover: rgba(255, 140, 0, 0.8);
+            --accent-glow: rgba(255, 140, 0, 0.15);
+            --header-bg: linear-gradient(to bottom, #ffffff, #fff8ee);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -38,31 +64,39 @@
             min-height: 100vh;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 50% -10%, rgba(197, 160, 89, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 50% 100%, rgba(197, 160, 89, 0.05) 0%, transparent 40%);
+                radial-gradient(circle at 50% -10%, var(--accent-glow) 0%, transparent 50%),
+                radial-gradient(circle at 50% 100%, var(--accent-glow) 0%, transparent 40%);
+            transition: background 0.8s ease;
         }
 
         header { 
             text-align: center; 
-            padding: 45px 20px 25px 20px; 
-            border-bottom: 1px solid rgba(184, 151, 66, 0.2);
-            background: linear-gradient(to bottom, #ffffff, #fcfbfa);
+            padding: 40px 20px 25px 20px; 
+            border-bottom: 1px solid var(--border-gold);
+            background: var(--header-bg);
             position: relative;
+            transition: all 0.8s ease;
         }
 
-        /* Dynamic Festival Banner (Appears automatically based on Google Sheet Column G) */
+        /* Immersive Festival Header Banner */
         #dynamic-banner {
             display: none;
             background: var(--gold-gradient);
-            color: #fff;
-            font-size: 8px;
-            letter-spacing: 3px;
+            color: #ffffff;
+            font-size: 8.5px;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            padding: 6px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            border-radius: 4px;
-            box-shadow: 0 4px 15px rgba(184, 151, 66, 0.2);
+            padding: 8px 12px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            border-radius: 6px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .brand-title { 
@@ -92,15 +126,16 @@
             padding: 30px 14px 70px 14px;
         }
 
-        /* --- White Luxury Crystal Slider --- */
+        /* White Luxury Slider Stage */
         .slider-stage {
             width: 100%;
             margin-bottom: 35px;
             border-radius: 16px;
             padding: 1.5px;
             background: var(--gold-gradient);
-            box-shadow: 0 20px 40px rgba(184, 151, 66, 0.15), 0 10px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
             position: relative;
+            transition: background 0.8s ease;
         }
 
         .slider-inner {
@@ -151,7 +186,7 @@
             width: 100%;
             padding: 12px 15px;
             background: linear-gradient(to top, #fcfbfa 80%, rgba(252,251,250,0.9) 100%);
-            border-top: 1px solid rgba(184, 151, 66, 0.15);
+            border-top: 1px solid var(--border-gold);
             text-align: center;
         }
 
@@ -194,7 +229,6 @@
             width: 16px;
             border-radius: 4px;
             background: var(--gold-solid);
-            box-shadow: 0 0 6px rgba(184, 151, 66, 0.5);
         }
 
         /* Section Title */
@@ -239,14 +273,14 @@
             display: flex; 
             flex-direction: column; 
             position: relative;
-            box-shadow: 0 10px 30px rgba(184, 151, 66, 0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .perfume-card:hover {
             transform: translateY(-4px);
             border-color: var(--border-gold-hover);
-            box-shadow: 0 15px 35px rgba(184, 151, 66, 0.18);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
         }
 
         .image-container { 
@@ -301,7 +335,7 @@
         .perfume-price {
             font-family: 'Cormorant Garamond', serif;
             font-size: 16px; 
-            color: #b89742;
+            color: var(--gold-solid);
             font-weight: 700;
         }
 
@@ -332,13 +366,12 @@
             margin-top: auto; 
             letter-spacing: 2px;
             text-transform: uppercase;
-            box-shadow: 0 4px 12px rgba(184, 151, 66, 0.25);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
 
         .btn:hover {
             filter: brightness(1.05);
-            box-shadow: 0 6px 16px rgba(184, 151, 66, 0.35);
         }
 
         .stock-tag { 
@@ -382,7 +415,7 @@
         footer {
             margin-top: 60px;
             text-align: center;
-            border-top: 1px solid rgba(184, 151, 66, 0.2);
+            border-top: 1px solid var(--border-gold);
             padding-top: 30px;
         }
 
@@ -409,7 +442,7 @@
 <body>
 
     <header>
-        <div id="dynamic-banner">✨ Special Festival Collection Active ✨</div>
+        <div id="dynamic-banner">✨ Special Collection Active ✨</div>
         <div class="brand-title">UB Perfumes</div>
         <div class="brand-subtitle">Haute Parfumerie Royale</div>
     </header>
@@ -472,11 +505,12 @@
             dots[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
+            dots[currentScale = currentSlide];
             dots[currentSlide].classList.add('active');
         }
         setInterval(nextSlide, 5000);
 
-        // Google Sheet Render with Offer Price & Festival Theme Support
+        // Google Sheet Render with Dynamic Theme Switcher
         window.renderPerfumes = function(data) {
             const container = document.getElementById('perfume-list');
             container.innerHTML = '';
@@ -497,7 +531,6 @@
                 const img = cols[3] && cols[3].v ? String(cols[3].v).trim() : 'https://via.placeholder.com/200';
                 const stockStatus = cols[4] && cols[4].v ? String(cols[4].v).trim().toLowerCase() : '';
                 
-                // New Columns: Column F (Offer Price), Column G (Festival/Occasion)
                 const offerPrice = cols[5] && cols[5].v !== null ? String(cols[5].v).trim() : '';
                 const festival = cols[6] && cols[6].v ? String(cols[6].v).trim() : '';
                 
@@ -542,20 +575,20 @@
                 `;
             });
 
-            // Update Dynamic Banner if Festival is provided in sheet
+            // Dynamic Theme Changer based on Google Sheet Festival Name
             if (activeFestival) {
                 const banner = document.getElementById('dynamic-banner');
-                banner.innerHTML = `✨ Special ${activeFestival} Collection & Offers Live ✨`;
+                banner.innerHTML = `🇸🇦 Special ${activeFestival} Celebration Collection & Offers Live 🇸🇦`;
                 banner.style.display = 'block';
+
+                const festivalLower = activeFestival.toLowerCase();
+                if (festivalLower.includes('saudi') || festivalLower.includes('national day')) {
+                    document.body.classList.add('theme-saudi');
+                } else if (festivalLower.includes('diwali') || festivalLower.includes('deepawali')) {
+                    document.body.classList.add('theme-diwali');
+                }
             }
         };
 
         const script = document.createElement('script');
-        script.src = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=responseHandler:renderPerfumes`;
-        script.onerror = function() {
-            document.getElementById('perfume-list').innerHTML = '<div class="loading">UNABLE TO REACH PRIVATE VAULT</div>';
-        };
-        document.body.appendChild(script);
-    </script>
-</body>
-</html>
+        script.
