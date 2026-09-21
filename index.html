@@ -13,39 +13,17 @@
 
     <style>
         :root {
-            /* Default Luxury White & Gold */
+            /* 👑 Pure White & Luxury Gold Base (Fixed & Unchanged) */
             --gold-gradient: linear-gradient(135deg, #c5a059 0%, #dfbf7f 30%, #b89742 70%, #856119 100%);
             --gold-solid: #b89742;
+            --gold-light: #fcfbfa;
             --bg-deep: #ffffff;
             --card-surface: #ffffff;
             --border-gold: rgba(184, 151, 66, 0.25);
             --border-gold-hover: rgba(184, 151, 66, 0.9);
             --text-main: #1a1a1a;
             --text-muted: #777777;
-            --header-bg: linear-gradient(to bottom, #ffffff, #fcfbfa);
-            --accent-glow: rgba(184, 151, 66, 0.1);
-        }
-
-        /* 🇸🇦 Saudi National Day - Deep Immersive Emerald & Gold Vibe */
-        body.theme-saudi {
-            --gold-gradient: linear-gradient(135deg, #006C35 0%, #009e4f 35%, #D4AF37 75%, #004225 100%);
-            --gold-solid: #006C35;
-            --border-gold: rgba(0, 108, 53, 0.4);
-            --border-gold-hover: rgba(0, 108, 53, 1);
-            --accent-glow: rgba(0, 108, 53, 0.18);
-            --header-bg: linear-gradient(to bottom, #f0fdf4, #dcfce7);
-            --card-surface: #fbfefc;
-        }
-
-        /* 🪔 Diwali / Festive - Warm Golden Orange Vibe */
-        body.theme-diwali {
-            --gold-gradient: linear-gradient(135deg, #e65c00 0%, #F9D423 50%, #FF4E50 100%);
-            --gold-solid: #e65c00;
-            --border-gold: rgba(230, 92, 0, 0.4);
-            --border-gold-hover: rgba(230, 92, 0, 1);
-            --accent-glow: rgba(230, 92, 0, 0.18);
-            --header-bg: linear-gradient(to bottom, #fffaf5, #ffeeda);
-            --card-surface: #fffdfa;
+            --header-bg: #ffffff;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -57,43 +35,43 @@
             min-height: 100vh;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 50% 0%, var(--accent-glow) 0%, transparent 70%),
-                radial-gradient(circle at 50% 100%, var(--accent-glow) 0%, transparent 70%);
-            transition: all 0.8s ease;
+                radial-gradient(circle at 50% -10%, rgba(197, 160, 89, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 50% 100%, rgba(197, 160, 89, 0.04) 0%, transparent 40%);
         }
 
         header { 
             text-align: center; 
-            padding: 40px 20px 25px 20px; 
-            border-bottom: 2px solid var(--border-gold);
+            padding: 30px 20px 25px 20px; 
+            border-bottom: 1px solid var(--border-gold);
             background: var(--header-bg);
-            transition: all 0.8s ease;
+            position: relative;
         }
 
-        /* Massive Immersive Vibe Banner */
+        /* 🌟 High-Vibe Immersive Festival Announcement Marquee / Banner */
         #dynamic-banner {
             display: none;
             background: var(--gold-gradient);
             color: #ffffff;
-            font-size: 10px;
-            letter-spacing: 4px;
+            font-size: 9.5px;
+            letter-spacing: 3.5px;
             text-transform: uppercase;
             padding: 10px 15px;
             font-weight: 700;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 8px 25px var(--accent-glow);
-            animation: pulseGlow 2s infinite alternate;
+            margin-bottom: 22px;
+            border-radius: 6px;
+            box-shadow: 0 6px 20px rgba(184, 151, 66, 0.3);
+            text-align: center;
+            animation: fadeInBanner 0.8s ease-out;
         }
 
-        @keyframes pulseGlow {
-            0% { transform: scale(1); box-shadow: 0 4px 15px var(--accent-glow); }
-            100% { transform: scale(1.02); box-shadow: 0 8px 30px var(--accent-glow); }
+        @keyframes fadeInBanner {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .brand-title { 
             font-family: 'Cormorant Garamond', serif; 
-            font-size: 34px; 
+            font-size: 32px; 
             letter-spacing: 9px; 
             font-weight: 700; 
             background: var(--gold-gradient);
@@ -109,7 +87,7 @@
             letter-spacing: 5px;
             color: var(--text-muted);
             text-transform: uppercase;
-            font-weight: 600;
+            font-weight: 500;
         }
 
         .wrapper {
@@ -118,23 +96,22 @@
             padding: 30px 14px 70px 14px;
         }
 
-        /* Slider Stage */
+        /* White Luxury Slider Stage */
         .slider-stage {
             width: 100%;
             margin-bottom: 35px;
             border-radius: 16px;
-            padding: 2px;
+            padding: 1.5px;
             background: var(--gold-gradient);
-            box-shadow: 0 15px 35px var(--accent-glow);
+            box-shadow: 0 15px 35px rgba(184, 151, 66, 0.12);
             position: relative;
-            transition: all 0.8s ease;
         }
 
         .slider-inner {
             width: 100%;
             height: 340px;
             background: #ffffff;
-            border-radius: 14px;
+            border-radius: 15px;
             position: relative;
             overflow: hidden;
         }
@@ -155,12 +132,12 @@
         .slide.active { opacity: 1; visibility: visible; z-index: 1; }
 
         .slide-img-frame { width: 100%; height: 240px; display: flex; align-items: center; justify-content: center; padding: 10px; }
-        .slide-img { max-width: 100%; max-height: 100%; object-fit: contain; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.1)); }
+        .slide-img { max-width: 100%; max-height: 100%; object-fit: contain; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.08)); }
 
         .slide-caption {
             width: 100%;
             padding: 12px 15px;
-            background: #ffffff;
+            background: var(--gold-light);
             border-top: 1px solid var(--border-gold);
             text-align: center;
         }
@@ -170,24 +147,24 @@
 
         /* Grid Section */
         .section-header { text-align: center; margin: 35px 0 25px 0; position: relative; }
-        .section-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: 5px; color: var(--gold-solid); text-transform: uppercase; font-weight: 700; }
-        .section-header::after { content: ''; display: block; width: 50px; height: 1.5px; background: var(--gold-solid); margin: 8px auto 0 auto; opacity: 0.6; }
+        .section-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: 5px; color: var(--gold-solid); text-transform: uppercase; font-weight: 600; }
+        .section-header::after { content: ''; display: block; width: 40px; height: 1px; background: var(--gold-solid); margin: 8px auto 0 auto; opacity: 0.4; }
 
         .container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; width: 100%; }
         
         .perfume-card { 
             background: var(--card-surface); 
-            border: 1.5px solid var(--border-gold); 
+            border: 1px solid var(--border-gold); 
             border-radius: 14px; 
             padding: 12px; 
             display: flex; 
             flex-direction: column; 
             position: relative;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+            box-shadow: 0 10px 30px rgba(184, 151, 66, 0.06);
             transition: all 0.4s ease;
         }
 
-        .perfume-card:hover { transform: translateY(-4px); border-color: var(--border-gold-hover); box-shadow: 0 15px 35px var(--accent-glow); }
+        .perfume-card:hover { transform: translateY(-4px); border-color: var(--border-gold-hover); box-shadow: 0 15px 35px rgba(184, 151, 66, 0.15); }
 
         .image-container { width: 100%; padding-top: 100%; position: relative; overflow: hidden; border-radius: 10px; margin-bottom: 12px; background: #ffffff; border: 1px solid rgba(0,0,0,0.03); }
         .product-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
@@ -214,25 +191,27 @@
             margin-top: auto; 
             letter-spacing: 2px;
             text-transform: uppercase;
-            box-shadow: 0 4px 12px var(--accent-glow);
+            box-shadow: 0 4px 12px rgba(184, 151, 66, 0.25);
             transition: all 0.3s ease;
         }
 
+        /* 🌟 High-Vibe Golden Festival Badge on Card */
         .festival-badge {
             position: absolute; top: 12px; right: 12px;
             background: var(--gold-gradient);
-            color: white; padding: 4px 8px; font-size: 6.5px; border-radius: 4px; font-weight: 700; z-index: 2; letter-spacing: 1px; text-transform: uppercase;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            color: white; padding: 4px 8px; font-size: 6.5px; border-radius: 4px; font-weight: 700; z-index: 2; letter-spacing: 1.2px; text-transform: uppercase;
+            box-shadow: 0 3px 10px rgba(184, 151, 66, 0.35);
         }
 
-        footer { margin-top: 60px; text-align: center; border-top: 2px solid var(--border-gold); padding-top: 30px; }
+        footer { margin-top: 60px; text-align: center; border-top: 1px solid var(--border-gold); padding-top: 30px; }
         .footer-text { font-family: 'Cormorant Garamond', serif; font-size: 12px; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 5px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; }
     </style>
 </head>
 <body>
 
     <header>
-        <div id="dynamic-banner">✨ Special Collection Active ✨</div>
+        <!-- यहाँ Google Sheet से आने वाला फेस्टिवल नाम शानदार बैनर के रूप में दिखेगा -->
+        <div id="dynamic-banner">✨ Special Festival Collection Active ✨</div>
         <div class="brand-title">UB Perfumes</div>
         <div class="brand-subtitle">Haute Parfumerie Royale</div>
     </header>
@@ -259,7 +238,7 @@
 
         <div class="section-header"><h2>The Private Vault</h2></div>
         <div class="container" id="perfume-list">
-            <div style="text-align:center; grid-column:span 2; padding:40px; font-family:'Cormorant Garamond'; color:#b89742;">LOADING COLLECTION...</div>
+            <div style="text-align:center; grid-column:span 2; padding:40px; font-family:'Cormorant Garamond'; color:#b89742; letter-spacing:2px;">ENTERING PRIVATE VAULT...</div>
         </div>
         <footer>
             <div class="footer-text">UB Perfumes Gujarat</div>
@@ -271,7 +250,7 @@
         const SHEET_ID = '13rNvj9LgIuMGplhhNrScH8I8cwguZ5inDTzGphm1EqY'; 
         const WHATSAPP_NUMBER = '919898647697'; 
 
-        // Slider Engine
+        // Slider
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
         setInterval(() => {
@@ -280,7 +259,7 @@
             slides[currentSlide].classList.add('active');
         }, 4000);
 
-        // Google Sheet Immersive Theme Engine
+        // Google Sheet Engine (Pure White & Gold Shade Maintained, High Vibe Festival Activation)
         window.renderPerfumes = function(data) {
             const container = document.getElementById('perfume-list');
             container.innerHTML = '';
@@ -296,7 +275,7 @@
                     const img = cols[3] && cols[3].v ? String(cols[3].v).trim() : 'https://via.placeholder.com/200';
                     
                     const offerPrice = (cols.length > 5 && cols[5] && cols[5].v) ? String(cols[5].v).trim() : '';
-                    const festival = (cols.length > 6 && cols.length > 6 && cols[6] && cols[6].v) ? String(cols[6].v).trim() : '';
+                    const festival = (cols.length > 6 && cols[6] && cols[6].v) ? String(cols[6].v).trim() : '';
                     
                     if (festival && !activeFestival) activeFestival = festival;
 
@@ -322,21 +301,11 @@
                 });
             }
 
-            // Apply Immersive Vibe based on Google Sheet Festival
+            // High Vibe Dynamic Banner Update (Without altering the white/gold luxury shade)
             if (activeFestival) {
                 const banner = document.getElementById('dynamic-banner');
                 banner.style.display = 'block';
-                
-                const fest = activeFestival.toLowerCase();
-                if (fest.includes('saudi') || fest.includes('national day')) {
-                    document.body.classList.add('theme-saudi');
-                    banner.innerHTML = `🇸🇦 Official ${activeFestival} Celebration Collection & Offers 🇸🇦`;
-                } else if (fest.includes('diwali')) {
-                    document.body.classList.add('theme-diwali');
-                    banner.innerHTML = `🪔 Exclusive ${activeFestival} Royal Festive Sale 🪔`;
-                } else {
-                    banner.innerHTML = `✨ Special ${activeFestival} Event Collection Active ✨`;
-                }
+                banner.innerHTML = `🌟 Special ${activeFestival} Celebration Collection & Offers Live 🌟`;
             }
         };
 
