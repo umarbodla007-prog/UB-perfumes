@@ -18,13 +18,15 @@
 
     <style>
         :root {
-            --gold-gradient: linear-gradient(135deg, #d4af37 0%, #fff2a3 25%, #aa771c 50%, #fcf6ba 75%, #8d6219 100%);
-            --gold-solid: #d4af37;
-            --gold-light: #f3e5ab;
-            --bg-deep: #050507;
-            --card-surface: #0c0c0f;
-            --border-gold: rgba(212, 175, 55, 0.25);
-            --border-gold-hover: rgba(212, 175, 55, 0.8);
+            --gold-gradient: linear-gradient(135deg, #c5a059 0%, #dfbf7f 25%, #967129 50%, #f3e5ab 75%, #856119 100%);
+            --gold-solid: #b89742;
+            --gold-light: #f9f6ed;
+            --bg-deep: #ffffff;
+            --card-surface: #faf9f5;
+            --border-gold: rgba(184, 151, 66, 0.25);
+            --border-gold-hover: rgba(184, 151, 66, 0.7);
+            --text-main: #1a1a1a;
+            --text-muted: #666666;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -32,42 +34,56 @@
         body { 
             font-family: 'Montserrat', sans-serif; 
             background-color: var(--bg-deep);
-            color: #e5e5e5; 
+            color: var(--text-main); 
             min-height: 100vh;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 50% -20%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
-                radial-gradient(circle at 50% 100%, rgba(170, 119, 28, 0.08) 0%, transparent 50%);
+                radial-gradient(circle at 50% -10%, rgba(197, 160, 89, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 100%, rgba(197, 160, 89, 0.05) 0%, transparent 40%);
         }
 
         header { 
             text-align: center; 
-            padding: 50px 20px 30px 20px; 
-            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
-            background: linear-gradient(to bottom, #030304, #08080a);
+            padding: 45px 20px 25px 20px; 
+            border-bottom: 1px solid rgba(184, 151, 66, 0.2);
+            background: linear-gradient(to bottom, #ffffff, #fcfbfa);
             position: relative;
+        }
+
+        /* Dynamic Festival Banner (Appears automatically based on Google Sheet Column G) */
+        #dynamic-banner {
+            display: none;
+            background: var(--gold-gradient);
+            color: #fff;
+            font-size: 8px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 6px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(184, 151, 66, 0.2);
         }
 
         .brand-title { 
             font-family: 'Cormorant Garamond', serif; 
-            font-size: 34px; 
-            letter-spacing: 10px; 
+            font-size: 32px; 
+            letter-spacing: 9px; 
             font-weight: 700; 
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-            margin-bottom: 6px;
-            filter: drop-shadow(0 2px 10px rgba(212, 175, 55, 0.3));
+            margin-bottom: 4px;
         }
 
         .brand-subtitle {
             font-family: 'Montserrat', sans-serif;
-            font-size: 9px;
-            letter-spacing: 6px;
-            color: #888;
+            font-size: 8.5px;
+            letter-spacing: 5px;
+            color: var(--text-muted);
             text-transform: uppercase;
-            font-weight: 400;
+            font-weight: 500;
         }
 
         .wrapper {
@@ -76,22 +92,22 @@
             padding: 30px 14px 70px 14px;
         }
 
-        /* --- Roja & Clive Christian Style High-End Crystal Slider --- */
+        /* --- White Luxury Crystal Slider --- */
         .slider-stage {
             width: 100%;
-            margin-bottom: 40px;
-            border-radius: 18px;
+            margin-bottom: 35px;
+            border-radius: 16px;
             padding: 1.5px;
             background: var(--gold-gradient);
-            box-shadow: 0 40px 80px rgba(0,0,0,0.99), 0 0 35px rgba(212, 175, 55, 0.2);
+            box-shadow: 0 20px 40px rgba(184, 151, 66, 0.15), 0 10px 20px rgba(0,0,0,0.05);
             position: relative;
         }
 
         .slider-inner {
             width: 100%;
             height: 340px;
-            background: radial-gradient(circle at 50% 40%, #16161c 0%, #060608 100%);
-            border-radius: 17px;
+            background: #ffffff;
+            border-radius: 15px;
             position: relative;
             overflow: hidden;
         }
@@ -102,12 +118,11 @@
             width: 100%; height: 100%;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.8s;
+            transition: opacity 1.5s ease, visibility 1.5s;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            padding: 20px 20px 15px 20px;
+            justify-content: center;
         }
 
         .slide.active { 
@@ -116,58 +131,45 @@
             z-index: 1; 
         }
 
-        /* 100% Crystal Clear Image Container - Zero Blur, Zero Crop */
-        .slide-img-box {
+        .slide-img-frame {
             width: 100%;
-            height: 225px;
+            height: 240px;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
+            padding: 10px;
         }
 
         .slide-img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.95));
-            transform: scale(0.95);
-            transition: transform 6s cubic-bezier(0.25, 1, 0.5, 1);
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.12));
         }
 
-        .slide.active .slide-img {
-            transform: scale(1.02);
-        }
-
-        /* Separate Floating Glassmorphism Caption Box (No overlapping blur on image) */
         .slide-caption {
             width: 100%;
-            background: rgba(12, 12, 16, 0.85);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 10px;
-            padding: 10px 15px;
+            padding: 12px 15px;
+            background: linear-gradient(to top, #fcfbfa 80%, rgba(252,251,250,0.9) 100%);
+            border-top: 1px solid rgba(184, 151, 66, 0.15);
             text-align: center;
-            backdrop-filter: blur(10px);
-            margin-top: auto;
         }
 
         .slide-tag {
             font-size: 6.5px;
-            letter-spacing: 3.5px;
-            color: #999;
+            letter-spacing: 3px;
+            color: var(--text-muted);
             text-transform: uppercase;
             margin-bottom: 2px;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .slide-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 600;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 2px;
+            color: #1a1a1a;
+            letter-spacing: 1.5px;
         }
 
         /* Slider Indicators */
@@ -184,7 +186,7 @@
             width: 5px;
             height: 5px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.3);
+            background: rgba(0,0,0,0.2);
             transition: all 0.4s ease;
         }
 
@@ -192,10 +194,10 @@
             width: 16px;
             border-radius: 4px;
             background: var(--gold-solid);
-            box-shadow: 0 0 8px var(--gold-solid);
+            box-shadow: 0 0 6px rgba(184, 151, 66, 0.5);
         }
 
-        /* Section Title Styling */
+        /* Section Title */
         .section-header {
             text-align: center;
             margin: 35px 0 25px 0;
@@ -206,7 +208,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 14px;
             letter-spacing: 5px;
-            color: var(--gold-light);
+            color: var(--gold-solid);
             text-transform: uppercase;
             font-weight: 600;
         }
@@ -218,10 +220,10 @@
             height: 1px;
             background: var(--gold-solid);
             margin: 8px auto 0 auto;
-            opacity: 0.5;
+            opacity: 0.4;
         }
 
-        /* Strict Grid Layout */
+        /* Product Grid */
         .container { 
             display: grid; 
             grid-template-columns: repeat(2, 1fr); 
@@ -237,15 +239,14 @@
             display: flex; 
             flex-direction: column; 
             position: relative;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.85);
-            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(184, 151, 66, 0.08);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .perfume-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
             border-color: var(--border-gold-hover);
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.12);
+            box-shadow: 0 15px 35px rgba(184, 151, 66, 0.18);
         }
 
         .image-container { 
@@ -255,8 +256,8 @@
             overflow: hidden; 
             border-radius: 10px; 
             margin-bottom: 12px; 
-            background: #000;
-            border: 1px solid rgba(255,255,255,0.03);
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.04);
         }
 
         .product-img { 
@@ -264,11 +265,11 @@
             top: 0; left: 0; 
             width: 100%; height: 100%; 
             object-fit: cover; 
-            transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: transform 0.7s ease;
         }
 
         .perfume-card:hover .product-img {
-            transform: scale(1.08);
+            transform: scale(1.06);
         }
 
         .perfume-title {
@@ -276,7 +277,7 @@
             font-size: 14px; 
             margin-bottom: 6px; 
             font-weight: 600; 
-            color: #fff; 
+            color: #1a1a1a; 
             letter-spacing: 0.8px;
             white-space: nowrap;
             overflow: hidden;
@@ -291,27 +292,37 @@
             margin-bottom: 14px;
         }
 
+        .price-box {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
         .perfume-price {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 17px; 
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 16px; 
+            color: #b89742;
             font-weight: 700;
+        }
+
+        .original-price {
+            font-size: 10px;
+            color: #999;
+            text-decoration: line-through;
         }
 
         .perfume-volume {
             font-size: 7px;
-            color: #888;
+            color: var(--text-muted);
             letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
-        /* Ultra-Luxury Order Button */
+        /* Order Button */
         .btn { 
             display: block; 
             background: var(--gold-gradient); 
-            color: #030304; 
+            color: #ffffff; 
             text-align: center; 
             padding: 10px 4px; 
             border-radius: 20px; 
@@ -321,36 +332,19 @@
             margin-top: auto; 
             letter-spacing: 2px;
             text-transform: uppercase;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+            box-shadow: 0 4px 12px rgba(184, 151, 66, 0.25);
             transition: all 0.3s ease;
         }
 
         .btn:hover {
-            filter: brightness(1.1);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
-        }
-
-        .btn:active { transform: scale(0.98); }
-        
-        .perfume-card.out-of-stock .product-img { filter: grayscale(100%) brightness(0.4); }
-        .btn-out { 
-            background: #09090b; 
-            border: 1px solid rgba(255,255,255,0.08);
-            color: #555; 
-            cursor: not-allowed; 
-            text-align: center; 
-            padding: 10px 4px; 
-            border-radius: 20px; 
-            font-size: 8px; 
-            margin-top: auto; 
-            font-weight: 600; 
-            letter-spacing: 1.5px;
+            filter: brightness(1.05);
+            box-shadow: 0 6px 16px rgba(184, 151, 66, 0.35);
         }
 
         .stock-tag { 
             position: absolute; 
             top: 14px; left: 14px; 
-            background: rgba(140, 20, 20, 0.9); 
+            background: rgba(180, 40, 40, 0.9); 
             color: white; 
             padding: 3px 7px; 
             font-size: 7px; 
@@ -358,7 +352,20 @@
             font-weight: 600; 
             z-index: 2; 
             letter-spacing: 1.5px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .festival-badge {
+            position: absolute;
+            top: 14px; right: 14px;
+            background: var(--gold-solid);
+            color: white;
+            padding: 3px 7px;
+            font-size: 6.5px;
+            border-radius: 4px;
+            font-weight: 600;
+            z-index: 2;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
         }
 
         .loading { 
@@ -366,9 +373,7 @@
             grid-column: span 2; 
             font-family: 'Cormorant Garamond', serif;
             font-size: 13px; 
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--gold-solid);
             padding: 40px; 
             letter-spacing: 3px; 
             font-weight: 600;
@@ -377,7 +382,7 @@
         footer {
             margin-top: 60px;
             text-align: center;
-            border-top: 1px solid rgba(212, 175, 55, 0.15);
+            border-top: 1px solid rgba(184, 151, 66, 0.2);
             padding-top: 30px;
         }
 
@@ -395,7 +400,7 @@
 
         .footer-sub {
             font-size: 7.5px;
-            color: #666;
+            color: var(--text-muted);
             letter-spacing: 2.5px;
             text-transform: uppercase;
         }
@@ -404,16 +409,17 @@
 <body>
 
     <header>
+        <div id="dynamic-banner">✨ Special Festival Collection Active ✨</div>
         <div class="brand-title">UB Perfumes</div>
         <div class="brand-subtitle">Haute Parfumerie Royale</div>
     </header>
 
     <div class="wrapper">
-        <!-- Crystal Clear High-End Luxury Slider -->
+        <!-- Slider Stage -->
         <div class="slider-stage">
             <div class="slider-inner" id="slider-container">
                 <div class="slide active">
-                    <div class="slide-img-box">
+                    <div class="slide-img-frame">
                         <img class="slide-img" src="https://i.postimg.cc/Gm6NLs43/1784547021297.png" alt="Royal Kasturi">
                     </div>
                     <div class="slide-caption">
@@ -422,7 +428,7 @@
                     </div>
                 </div>
                 <div class="slide">
-                    <div class="slide-img-box">
+                    <div class="slide-img-frame">
                         <img class="slide-img" src="https://i.postimg.cc/rmnw3h5j/1785151122893.png" alt="Chocolate Fragrance">
                     </div>
                     <div class="slide-caption">
@@ -431,7 +437,6 @@
                     </div>
                 </div>
                 
-                <!-- Indicators -->
                 <div class="slider-dots">
                     <span class="dot active"></span>
                     <span class="dot"></span>
@@ -457,7 +462,7 @@
         const SHEET_ID = '13rNvj9LgIuMGplhhNrScH8I8cwguZ5inDTzGphm1EqY'; 
         const WHATSAPP_NUMBER = '919898647697'; 
 
-        // Smooth Slider Engine
+        // Slider Engine
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
         let currentSlide = 0;
@@ -465,16 +470,13 @@
         function nextSlide() {
             slides[currentSlide].classList.remove('active');
             dots[currentSlide].classList.remove('active');
-            
             currentSlide = (currentSlide + 1) % slides.length;
-            
             slides[currentSlide].classList.add('active');
             dots[currentSlide].classList.add('active');
         }
-
         setInterval(nextSlide, 5000);
 
-        // Lightning-Fast Google Sheet Data Render
+        // Google Sheet Render with Offer Price & Festival Theme Support
         window.renderPerfumes = function(data) {
             const container = document.getElementById('perfume-list');
             container.innerHTML = '';
@@ -484,41 +486,68 @@
                 return;
             }
 
+            let activeFestival = '';
+
             data.table.rows.forEach((row) => {
                 const cols = row.c;
                 if (!cols || !cols[0] || !cols[0].v) return;
 
                 const name = cols[0] ? String(cols[0].v).trim() : '';
-                const price = cols[1] && cols[1].v !== null ? String(cols[1].v).trim() : '';
+                const regularPrice = cols[1] && cols[1].v !== null ? String(cols[1].v).trim() : '';
                 const img = cols[3] && cols[3].v ? String(cols[3].v).trim() : 'https://via.placeholder.com/200';
                 const stockStatus = cols[4] && cols[4].v ? String(cols[4].v).trim().toLowerCase() : '';
                 
+                // New Columns: Column F (Offer Price), Column G (Festival/Occasion)
+                const offerPrice = cols[5] && cols[5].v !== null ? String(cols[5].v).trim() : '';
+                const festival = cols[6] && cols[6].v ? String(cols[6].v).trim() : '';
+                
+                if (festival && !activeFestival) {
+                    activeFestival = festival;
+                }
+
                 const isOutOfStock = stockStatus.includes('out');
                 if (!name) return;
 
-                let actionButton = `<a href="https://wa.me/${WHATSAPP_NUMBER}?text=I wish to order: ${encodeURIComponent(name)}" target="_blank" class="btn">ORDER VIA WHATSAPP</a>`;
-                let badge = '';
-                let cardClass = 'perfume-card';
+                let displayPriceHtml = `<span class="perfume-price">₹ ${regularPrice}</span>`;
+                if (offerPrice) {
+                    displayPriceHtml = `
+                        <div class="price-box">
+                            <span class="perfume-price">₹ ${offerPrice}</span>
+                            <span class="original-price">₹ ${regularPrice}</span>
+                        </div>
+                    `;
+                }
+
+                let actionButton = `<a href="https://wa.me/${WHATSAPP_NUMBER}?text=I%20wish%20to%20order:%20${encodeURIComponent(name)}" target="_blank" class="btn">ORDER VIA WHATSAPP</a>`;
+                let stockBadge = '';
+                let festivalBadge = festival ? `<div class="festival-badge">${festival}</div>` : '';
 
                 if (isOutOfStock) {
-                    actionButton = `<div class="btn-out">RESERVED</div>`;
-                    badge = `<div class="stock-tag">SOLD OUT</div>`;
-                    cardClass = 'perfume-card out-of-stock';
+                    actionButton = `<div class="btn" style="background:#ddd; color:#888; cursor:not-allowed;">RESERVED</div>`;
+                    stockBadge = `<div class="stock-tag">SOLD OUT</div>`;
                 }
 
                 container.innerHTML += `
-                    <div class="${cardClass}">
-                        ${badge}
+                    <div class="perfume-card">
+                        ${stockBadge}
+                        ${festivalBadge}
                         <div class="image-container"><img class="product-img" src="${img}" alt="${name}"></div>
                         <div class="perfume-title">${name}</div>
                         <div class="perfume-price-row">
-                            <span class="perfume-price">₹ ${price}</span>
-                            <span class="perfume-volume">SPRAY PERFUME</span>
+                            ${displayPriceHtml}
+                            <span class="perfume-volume">SPRAY</span>
                         </div>
                         ${actionButton}
                     </div>
                 `;
             });
+
+            // Update Dynamic Banner if Festival is provided in sheet
+            if (activeFestival) {
+                const banner = document.getElementById('dynamic-banner');
+                banner.innerHTML = `✨ Special ${activeFestival} Collection & Offers Live ✨`;
+                banner.style.display = 'block';
+            }
         };
 
         const script = document.createElement('script');
